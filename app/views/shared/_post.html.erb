@@ -1,9 +1,14 @@
-<span class="content"><%= wrap(post.content) %></span>
+<h4 class="media-heading"><%= link_to wrap(post.title), idea_path(post.id) %></h4>
+<span class="content"><%= truncate(wrap(post.content), length: 200, separator: ' ') %></span>
 <span class="timestamp">
-  Posted <%= time_ago_in_words(post.created_at) %> ago.
+  Posted <%= time_ago_in_words(post.created_at) %> ago by <%= link_to post.user.name, post.user %>.
 </span>
+<span class="pull-right post-actions">
 <% if current_user?(post.user) %>
-  <%= link_to "delete", post, method: :delete,
-                                   data: { confirm: "You sure?" },
-                                   title: post.content %>
+	<%= link_to "Edit", edit_idea_path(post.id), class: "glyphicon glyphicon-edit" %>
+  <%= link_to "Delete", post, method: :delete,
+                                   data: { confirm: "Are you sure you want to delete the idea?" },
+                                   title: post.title, class: "glyphicon glyphicon-remove" %>
 <% end %>
+</span>
+

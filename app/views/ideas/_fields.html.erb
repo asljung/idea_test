@@ -1,0 +1,11 @@
+<%= render 'shared/error_messages', object: f.object %>
+<div class="form-group">
+<div class="col-md-6">
+<%= f.label :title %>
+<%= f.text_field :title, :class => "form-control" %>
+</div>
+<div class="col-md-12">
+<%= f.label :content %>
+<%= f.text_area :content, :class => "form-control", size: "60x12"%>
+</div>
+</div>

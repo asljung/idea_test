@@ -1,0 +1,11 @@
+<% provide(:title, "Edit idea") %>
+<h1>Update your idea</h1>
+
+<div class="col-md-6 col-md-offset-3">
+  <%= form_for(@idea) do |f| %>
+    <%= render 'fields', f: f %>
+    <div class="col-md-6">
+    	<%= f.submit "Save changes", class: "btn btn-lg btn-primary form-control" %>
+		</div>
+  <% end %>
+</div>

@@ -17,6 +17,7 @@ describe User do
   it { should respond_to(:remember_token) }
   it { should respond_to(:authenticate) }
   it { should respond_to(:admin) }
+  it { should respond_to(:ideas) }
 
   it { should be_valid }
   it { should_not be_admin }
@@ -117,6 +118,21 @@ describe User do
 
       it { should_not eq user_for_invalid_password }
       specify { expect(user_for_invalid_password).to be_false }
+    end
+  end
+
+  describe "idea associations" do
+
+    before { @user.save }
+    let!(:older_idea) do
+      FactoryGirl.create(:idea, user: @user, created_at: 1.day.ago)
+    end
+    let!(:newer_idea) do
+      FactoryGirl.create(:idea, user: @user, created_at: 1.hour.ago)
+    end
+
+    it "should have the right ideas in the right order" do
+      expect(@user.ideas.to_a).to eq [newer_idea, older_idea]
     end
   end
 
