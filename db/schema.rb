@@ -11,11 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140122082813) do
+ActiveRecord::Schema.define(version: 20140124095605) do
 
   create_table "ideas", force: true do |t|
     t.string   "title"
-    t.string   "content"
+    t.text     "content",    limit: 255
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
