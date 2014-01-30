@@ -15,4 +15,11 @@ FactoryGirl.define do
     content "Lorem ipsum"
     user
   end
+
+  factory :comment do
+    title "Title"
+    body "Lorem ipsum"
+    user
+    commentable
+  end
 end

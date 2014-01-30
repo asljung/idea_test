@@ -15,6 +15,8 @@ group :development, :test do
   gem 'spork-rails', '4.0.0'
   gem 'guard-spork', '1.5.0'
   gem 'childprocess', '0.3.6'
+  gem "better_errors"
+  gem "binding_of_caller"
 end
 
 group :test do
@@ -29,6 +31,9 @@ gem 'coffee-rails', '4.0.1'
 gem 'jquery-rails', '3.0.4'
 gem 'turbolinks', '2.1.0'
 gem 'jbuilder', '1.0.2'
+gem 'therubyracer', :platform => :ruby
+gem 'ajax_pagination'
+gem 'bootsy'
 
 group :doc do
   gem 'sdoc', '0.3.20', require: false

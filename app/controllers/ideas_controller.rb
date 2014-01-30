@@ -5,6 +5,8 @@ class IdeasController < ApplicationController
 
   def show
     @idea = Idea.find(params[:id])
+    @comment = Comment.new
+    @comments_all = @idea.comment_threads
   end
 
   def create

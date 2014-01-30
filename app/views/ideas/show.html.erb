@@ -1,9 +1,23 @@
 <% provide(:title, @idea.title) %>
-<div class="row">
-  <div class="col-md-8">
-    <h1><%= @idea.title %></h1>
-    <hr>
-    <p><%= @idea.content %></p>
-    <hr>
-  </div>
+<div class="col-md-8">
+	<div class="row">
+	  <h1><%= @idea.title %></h1>
+	  <hr>
+	  <p><%= @idea.content %></p>
+	  <hr>
+	  
+	</div>
+	<h2 class="header-close-bot">Comments</h2>
+	<% if @comments_all.any? %>
+		<% @comments = @comments_all.paginate(:page => params[:page], :per_page => 5, :order => 'created_at DESC')%>
+		<%= will_paginate @comments %>
+	  <ol class="media-list">
+	    <%= render partial: "comment", collection: @comments, as: :comment %>
+		</ol>
+		<%= will_paginate @comments %>
+	<% end %>
 </div>
+<div class="col-md-4">
+	<%= render "shared/comment_form" %>
+</div>
+
