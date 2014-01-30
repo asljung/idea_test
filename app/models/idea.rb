@@ -1,4 +1,5 @@
 class Idea < ActiveRecord::Base
+	include Bootsy::Container
 	belongs_to :user
 	acts_as_commentable
 	has_many :comments

@@ -11,7 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140127150055) do
+ActiveRecord::Schema.define(version: 20140130095039) do
+
+  create_table "bootsy_image_galleries", force: true do |t|
+    t.integer  "bootsy_resource_id"
+    t.string   "bootsy_resource_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "bootsy_images", force: true do |t|
+    t.string   "image_file"
+    t.integer  "image_gallery_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "comments", force: true do |t|
     t.integer  "commentable_id",   default: 0
@@ -32,10 +46,13 @@ ActiveRecord::Schema.define(version: 20140127150055) do
 
   create_table "ideas", force: true do |t|
     t.string   "title"
-    t.text     "content",    limit: 255
+    t.text     "content",                  limit: 255
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "draft_comments_count",                 default: 0
+    t.integer  "published_comments_count",             default: 0
+    t.integer  "deleted_comments_count",               default: 0
   end
 
   add_index "ideas", ["user_id", "created_at"], name: "index_ideas_on_user_id_and_created_at"
@@ -48,6 +65,13 @@ ActiveRecord::Schema.define(version: 20140127150055) do
     t.boolean  "admin"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "my_draft_comments_count",     default: 0
+    t.integer  "my_published_comments_count", default: 0
+    t.integer  "my_comments_count",           default: 0
+    t.integer  "draft_comcoms_count",         default: 0
+    t.integer  "published_comcoms_count",     default: 0
+    t.integer  "deleted_comcoms_count",       default: 0
+    t.integer  "spam_comcoms_count",          default: 0
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

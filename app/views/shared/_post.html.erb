@@ -1,5 +1,5 @@
 <h4 class="media-heading"><%= link_to wrap(post.title), idea_path(post.id) %></h4>
-<span class="content"><%= truncate(wrap(post.content), length: 200, separator: ' ') %></span>
+<span class="content"><%= strip_tags(post.content.truncate(220)) %></span>
 <span class="timestamp">
   Posted <%= time_ago_in_words(post.created_at) %> ago by <%= link_to post.user.name, post.user %>.
 </span>

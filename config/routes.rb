@@ -1,4 +1,6 @@
 IdeaTest::Application.routes.draw do
+  mount Ckeditor::Engine => '/ckeditor'
+  mount Bootsy::Engine => '/bootsy', as: 'bootsy'
   resources :users
   resources :sessions, only: [:new, :create, :destroy]
   resources :ideas do
