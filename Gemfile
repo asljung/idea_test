@@ -33,7 +33,6 @@ gem 'turbolinks', '2.1.0'
 gem 'jbuilder', '1.0.2'
 gem 'therubyracer', :platform => :ruby
 gem 'ajax_pagination'
-gem 'bootsy'
 
 group :doc do
   gem 'sdoc', '0.3.20', require: false
