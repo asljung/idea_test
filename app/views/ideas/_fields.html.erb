@@ -6,6 +6,6 @@
 </div>
 <div class="col-md-12">
 <%= f.label :content %>
-<%= f.bootsy_area :content, :class => "form-control", size: "60x12"%>
+<%= f.cktext_area :content, :class => "form-control", :ckeditor => {:toolbar => 'mini'} %>
 </div>
 </div>
