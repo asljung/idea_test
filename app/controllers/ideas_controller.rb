@@ -1,5 +1,5 @@
 class IdeasController < ApplicationController
-	before_action :signed_in_user, only: [:create, :destroy, :edit, :update]
+	before_action :signed_in_user, only: [:new, :create, :destroy, :edit, :update]
 	before_action :correct_user,   only: [:destroy, :edit, :update]
 
 
@@ -44,7 +44,7 @@ class IdeasController < ApplicationController
   private
 
     def idea_params
-      params.require(:idea).permit(:content, :title, :bootsy_image_gallery_id)
+      params.require(:idea).permit(:content, :title)
     end
 
     def correct_user
