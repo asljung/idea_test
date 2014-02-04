@@ -1,0 +1,6 @@
+<ul class="nav nav-sidebar">
+	<% @areas = Area.all %>
+	<% @areas.each do |area|%>
+  <li><%= link_to area.title, area_path(area) %></li>
+  <% end %>
+</ul>

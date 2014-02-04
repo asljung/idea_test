@@ -1,25 +1,23 @@
 <% provide(:title, @area.title) %>
 <div class="row">
-    <aside class="col-md-3">
-      <section>
-        <%= render 'shared/user_info' %>
-      </section>
-       <section>
+    <div class="col-md-3 well">
         <a href="/submit"><button type="button" class="btn btn-lg btn-primary">Submit an Idea</button></a>
-      </section>
-    </aside>
+        <hr>
+        <h3>Areas</h3>
+        <%= render 'shared/area_menu' %>
+    </div>
     <div class="col-md-9">
+      <div class="jumbotron">
       <h1><%= @area.title %></h1>
       <p><%= @area.description %></p>
-      <hr>
+      </div>
       <% if @ideas_all.any? %>
-      <% @ideas = @ideas_all.paginate(:page => params[:page], :per_page => 5, :order => 'created_at DESC')%>
+      <% @ideas = @ideas_all.paginate(:page => params[:page], :per_page => 10, :order => 'created_at DESC')%>
       <%= will_paginate @ideas %>
       <ol class="media-list">
         <%= render partial: "shared/post", collection: @ideas, as: :post %>
       </ol>
       <%= will_paginate @ideas %>
       <% end %>
-      <%= debug @ideas_all %>
     </div>
   </div>

@@ -6,5 +6,9 @@ class AreasController < ApplicationController
 		@ideas_all = @area.ideas 
 	end
 
+	def index
+		@areas = Area.all
+	end
+
 end
 
