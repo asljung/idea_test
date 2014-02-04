@@ -15,7 +15,6 @@
 //= require ckeditor/override
 //= require ckeditor/init
 //= require ckeditor/config
-//= require bootsy
 //= require bootstrap
 //= require turbolinks
 //= require_tree .

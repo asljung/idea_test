@@ -2,7 +2,9 @@ namespace :db do
   desc "Fill database with sample data"
   task populate: :environment do
     make_users
+    make_areas
     make_ideas
+    make_comments
   end
 end
 
@@ -23,11 +25,38 @@ def make_users
   end
 end
 
-def make_ideas
-  users = User.all(limit: 6)
-  50.times do
+def make_areas
+  5.times do
     title = Faker::Lorem.sentence(1)
-    content = Faker::Lorem.sentence(5)
-    users.each { |user| user.ideas.create!(title: title, content: content) }
+    description = Faker::Lorem.sentence(5)
+    Area.create!(title: title, description: description)
   end
 end
+
+def make_ideas
+  users = User.all(limit: 6)
+  areas = Area.all
+  areas.each { |area|
+    50.times do
+      title = Faker::Lorem.sentence(1)
+      content = Faker::Lorem.sentence(50)
+      area_id = area.id
+      users.each { |user| user.ideas.create!(title: title, content: content, area_id: area_id) }
+    end
+  }
+end
+
+def make_comments
+  users = User.all(limit: 6)
+  ideas = Idea.all
+  ideas.each { |idea|
+    5.times do
+      title = Faker::Lorem.sentence(1)
+      body = Faker::Lorem.sentence(20)
+      commentable_id = idea.id
+      users.each { |user| 
+        Comment.create!(title: title, body: body, commentable_id: commentable_id, commentable_type: "Idea", user_id: user.id) }
+    end
+  }
+end
+
