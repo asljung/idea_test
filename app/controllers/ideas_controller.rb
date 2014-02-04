@@ -1,5 +1,5 @@
 class IdeasController < ApplicationController
-	before_action :signed_in_user, only: [:new, :create, :destroy, :edit, :update]
+	before_action :signed_in_user
 	before_action :correct_user,   only: [:destroy, :edit, :update]
 
 

@@ -31,7 +31,7 @@ describe Idea do
   end
 
   describe "with content that is too long" do
-    before { @idea.content = "a" * 1200 }
+    before { @idea.content = "a" * 2200 }
     it { should_not be_valid }
   end
   

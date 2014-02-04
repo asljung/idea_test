@@ -1,3 +1,10 @@
+<div class="panel panel-default">
+  <div class="panel-body">
+		<li id="<%= post.id %>" class="media">
+  		<div class="media-object pull-left"><%= link_to gravatar_for(post.user), post.user %>
+  		</div>
+  		<div class="media-body">
+
 <h4 class="media-heading"><%= link_to wrap(post.title), idea_path(post.id) %></h4>
 <span class="content"><%= strip_tags(post.content.truncate(220)) %></span>
 <span class="timestamp">
@@ -11,4 +18,9 @@
                                    title: post.title, class: "glyphicon glyphicon-remove" %>
 <% end %>
 </span>
+
+</div>
+		</li>
+	</div>
+</div>
 

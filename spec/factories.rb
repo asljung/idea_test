@@ -13,6 +13,7 @@ FactoryGirl.define do
   factory :idea do
     title "Title"
     content "Lorem ipsum"
+    area
     user
   end
 
@@ -22,4 +23,17 @@ FactoryGirl.define do
     user
     commentable
   end
+
+  factory :commentable, :class => "Idea" do
+    title "Title"
+    content "Lorem ipsum"
+    area
+    user
+  end
+
+  factory :area do
+    title "Title"
+    description "Lorem ipsum"
+  end
+
 end

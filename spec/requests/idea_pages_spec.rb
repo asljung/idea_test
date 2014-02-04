@@ -33,7 +33,7 @@ describe "Idea pages" do
   end
 
   describe "idea creation" do
-    before { visit root_path }
+    before { visit submit_path }
 
     describe "with invalid information" do
 
@@ -72,25 +72,26 @@ describe "Idea pages" do
   describe "show" do
     let(:user) { FactoryGirl.create(:user) }
     let!(:i1) { FactoryGirl.create(:idea, user: user, title: "Title", content: "Foo") }
+    let!(:c1) { FactoryGirl.create(:comment, user: user, commentable: i1) }
 
     before { visit idea_path(i1) }
 
     it { should have_content(i1.content) }
     it { should have_title(i1.title) }
 
-    describe "add comment form" do
-      before {fill_in 'comment_body', with:"Lorem Ipsum"}
-      it "should create comment" do
-      expect { click_button "Post Comment" }.to change(Comment, :count).by(1)
-    end
-    end
-
     describe "comments" do
-      let!(:c1) { FactoryGirl.create(:comment, user: user, commentable: i1) }
       it { should have_content(c1.body) }
       it { should have_content(c1.title) }
     end
 
+    describe "add comment form" do
+      before {fill_in 'comment_body', with:"Lorem Ipsum"
+        fill_in 'comment_title', with:"Lorem Title"}
+      it "should create comment" do
+      expect { click_button "Post Comment" }.to change(Comment, :count).by(1)
+      end
+    end
+    
   end
 
   describe "edit" do
@@ -103,7 +104,7 @@ describe "Idea pages" do
     end
 
     describe "page" do
-      it { should have_content("Update your idea") }
+      it { should have_content("Edit your idea") }
       it { should have_title("Edit idea") }
     end
 

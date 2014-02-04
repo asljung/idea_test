@@ -1,8 +1,1 @@
-<div class="panel panel-default">
-  <div class="panel-body">
-		<li id="<%= feed_item.id %>" class="media">
-  		<div class="media-object pull-left"><%= link_to gravatar_for(feed_item.user), feed_item.user %></div>
-  		<div class="media-body"><%= render partial: 'shared/post', locals: { post: feed_item } %></div>
-		</li>
-	</div>
-</div>
+<%= render partial: 'shared/post', locals: { post: feed_item } %>
