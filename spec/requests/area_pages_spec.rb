@@ -20,4 +20,14 @@ describe "Area pages" do
     
   end
 
+  describe "index" do
+    let!(:area) { FactoryGirl.create(:area) }
+
+    before { visit areas_path }
+    it { should have_title("Focus Areas") }
+    it { should have_content("Areas") }
+    it { should have_content(area.description) }
+    it { should have_content(area.title) }
+  end
+
 end

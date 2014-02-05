@@ -1,5 +1,12 @@
 FactoryGirl.define do
+  factory :organisation do
+    name "Name"
+    description "Lorem ipsum"
+    area_description "Lorem ipsum"
+  end
+
   factory :user do
+    organisation
     sequence(:name)  { |n| "Person #{n}" }
     sequence(:email) { |n| "person_#{n}@example.com"}
     password "foobar"
@@ -32,6 +39,7 @@ FactoryGirl.define do
   end
 
   factory :area do
+    organisation
     title "Title"
     description "Lorem ipsum"
   end

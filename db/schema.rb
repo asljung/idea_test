@@ -11,14 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140203161056) do
+ActiveRecord::Schema.define(version: 20140205151207) do
 
   create_table "areas", force: true do |t|
     t.string   "title"
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "organisation_id"
   end
+
+  add_index "areas", ["organisation_id"], name: "index_areas_on_organisation_id"
 
   create_table "ckeditor_assets", force: true do |t|
     t.string   "data_file_name",               null: false
@@ -65,6 +68,14 @@ ActiveRecord::Schema.define(version: 20140203161056) do
   add_index "ideas", ["area_id"], name: "index_ideas_on_area_id"
   add_index "ideas", ["user_id", "created_at"], name: "index_ideas_on_user_id_and_created_at"
 
+  create_table "organisations", force: true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.text     "area_description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "users", force: true do |t|
     t.string   "name"
     t.string   "email"
@@ -73,9 +84,11 @@ ActiveRecord::Schema.define(version: 20140203161056) do
     t.boolean  "admin"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "organisation_id"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
+  add_index "users", ["organisation_id"], name: "index_users_on_organisation_id"
   add_index "users", ["remember_token"], name: "index_users_on_remember_token"
 
 end

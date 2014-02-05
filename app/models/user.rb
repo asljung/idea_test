@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  belongs_to :organisation
   has_many :ideas
 	before_save { self.email = email.downcase }
   before_create :create_remember_token
@@ -18,7 +19,7 @@ class User < ActiveRecord::Base
   end
 
   def feed
-    self.ideas
+    Idea.find(:all, :limit => 5, :order => 'created_at desc')
   end
 
   private
