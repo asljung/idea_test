@@ -106,6 +106,7 @@ describe "Idea pages" do
     describe "page" do
       it { should have_content("Edit your idea") }
       it { should have_title("Edit idea") }
+      it { should have_content("Area")}
     end
 
     describe "with invalid information" do

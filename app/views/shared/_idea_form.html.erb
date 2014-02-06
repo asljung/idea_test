@@ -1,6 +1,7 @@
 <%= form_for(@idea) do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
   <div class="field">
+  	<%= f.collection_select :area_id, Area.all, :id, :title, include_blank: true %>
   	<%= f.text_field :title, placeholder: "Title..." %>
     <%= f.text_area :content, placeholder: "Submit new idea..." %>
   </div>
