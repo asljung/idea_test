@@ -1,4 +1,4 @@
-<% provide(:title, @org.name) %>
+<% provide(:title, @current_org.name) %>
 <div class="row">
     <div class="col-md-3 well">
         <a href="/submit"><button type="button" class="btn btn-lg btn-primary">Submit an Idea</button></a>
@@ -8,8 +8,8 @@
     </div>
     <div class="col-md-9">
       <div class="jumbotron">
-      <h1><%= @org.name %></h1>
-      <p><%= @org.description %></p>
+      <h1><%= @current_org.name %></h1>
+      <p><%= @current_org.description %></p>
       </div>
       <% if @ideas.any? %> 
       <h2>Latest Ideas</h2>   

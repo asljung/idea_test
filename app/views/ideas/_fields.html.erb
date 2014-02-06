@@ -4,7 +4,7 @@
 <%= f.label :title %>
 <%= f.text_field :title, :class => "form-control" %>
 <%= f.label :area %>
-<%= f.collection_select :area_id, @areas, :id, :title, {:selected => @area_sel.id} %>
+<%= f.collection_select :area_id, @current_areas, :id, :title, {:selected => @area_sel.id} %>
 </div>
 <div class="col-md-12">
 <%= f.label :content %>

@@ -23,6 +23,18 @@ module SessionsHelper
     user == current_user
   end
 
+  def current_org
+    @current_org = Organisation.find(current_user.organisation_id)
+  end
+
+  def current_areas
+    @current_areas = current_org.areas.all
+  end
+
+  def current_ideas 
+    @current_ideas = Idea.joins(area: :organisation).where(organisations: {id: current_org.id}).order(:created_at)
+  end
+
   def signed_in_user
     unless signed_in?
       store_location

@@ -1,17 +1,23 @@
 <% if signed_in? %>
-  <div class="row">
-    <aside class="col-md-3">
-      <section>
-        <%= render 'shared/user_info' %>
-      </section>
-       <section>
+  <% provide(:title, @current_org.name) %>
+<div class="row">
+    <div class="col-md-3 well">
         <a href="/submit"><button type="button" class="btn btn-lg btn-primary">Submit an Idea</button></a>
- <!--        <%= render 'shared/idea_form' %> -->
-      </section>
-    </aside>
+        <hr>
+        <h3>Areas</h3>
+        <%= render 'shared/area_menu' %>
+    </div>
     <div class="col-md-9">
-      <h3>Latest Idea Feed</h3>
-      <%= render 'shared/feed' %>
+      <div class="jumbotron">
+      <h1><%= @current_org.name %></h1>
+      <p><%= @current_org.description %></p>
+      </div>
+      <% if @ideas.any? %> 
+      <h2>Latest Ideas</h2>   
+        <ol class="media-list">
+          <%= render partial: "shared/post", collection: @ideas, as: :post %>
+        </ol>
+      <% end %>
     </div>
   </div>
 <% else %>

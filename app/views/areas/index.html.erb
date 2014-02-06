@@ -1,6 +1,6 @@
 <% provide(:title, 'Focus Areas') %>
-<h1>All Focus Areas</h1>
-
+<h1>All Focus Areas </br><small><%= current_org.area_description %></small></h1>
+<hr>
 <div class="row">
   <% @areas.each_with_index do |area, index| %>
   	<% if index == 3 %>

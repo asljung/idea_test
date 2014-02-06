@@ -1,7 +1,7 @@
 class IdeasController < ApplicationController
 	before_action :signed_in_user
 	before_action :correct_user,   only: [:destroy, :edit, :update]
-  before_action :load_areas, only: [:new, :create, :edit]
+  before_action :current_areas, only: [:new, :create, :edit]
   before_action :selected_area, only: [:new, :create]
 
 
@@ -54,11 +54,6 @@ class IdeasController < ApplicationController
     def correct_user
       @idea = current_user.ideas.find_by(id: params[:id])
       redirect_to root_url if @idea.nil?
-    end
-
-    def load_areas
-      @org = Organisation.find(current_user.organisation_id)
-      @areas = @org.areas.all
     end
 
     def selected_area
