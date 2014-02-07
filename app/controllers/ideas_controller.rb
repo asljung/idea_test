@@ -4,6 +4,11 @@ class IdeasController < ApplicationController
   before_action :current_areas, only: [:new, :create, :edit]
   before_action :selected_area, only: [:new, :create]
 
+  def index
+    # @feed_items = current_ideas
+    @feed_items = current_ideas.search(params[:search])
+    @search = params[:search]
+  end
 
   def show
     @idea = Idea.find(params[:id])
@@ -63,7 +68,7 @@ class IdeasController < ApplicationController
       if params[:area_id]
         @area_id = params[:area_id]
       else
-        @area_id = @areas.first
+        @area_id = current_areas.first
       end
     end
 end

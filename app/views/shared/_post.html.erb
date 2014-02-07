@@ -5,8 +5,10 @@
   		</div>
   		<div class="media-body">
 
-        <h4 class="media-heading"><%= link_to wrap(post.title), idea_path(post.id) %></h4>
-        <span class="content"><%= strip_tags(post.content.truncate(220)) %></span>
+        <h4 class="media-heading"><%= link_to highlight(wrap(post.title), @search), idea_path(post.id) %></h4>
+        <span class="content">  
+            <%= highlight(strip_tags(post.content.truncate(220)), @search) %>
+          </span>
         <span class="timestamp">
           Posted <%= time_ago_in_words(post.created_at) %> ago by <%= link_to post.user.name, post.user %> in <%= link_to Area.find(post.area_id).title, Area.find(post.area_id) %>.
         </span>

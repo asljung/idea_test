@@ -4,7 +4,9 @@ describe "Idea pages" do
 
   subject { page }
 
-  let(:user) { FactoryGirl.create(:user) }
+  let(:org) { FactoryGirl.create(:organisation) }
+  let!(:area) { FactoryGirl.create(:area, organisation: org) }
+  let!(:user) { FactoryGirl.create(:user, organisation: org) }
   before { sign_in user }
 
   describe "main idea creation" do
@@ -32,33 +34,9 @@ describe "Idea pages" do
     end
   end
 
-  describe "idea creation" do
-    before { visit submit_path }
-
-    describe "with invalid information" do
-
-      it "should not create a idea" do
-        expect { click_button "Submit" }.not_to change(Idea, :count)
-      end
-
-      describe "error messages" do
-        before { click_button "Submit" }
-        it { should have_content('error') }
-      end
-    end
-
-    describe "with valid information" do
-
-      before { fill_in 'idea_content', with: "Lorem ipsum" 
-          fill_in 'idea_title', with: "Lorem"}
-      it "should create a idea" do
-        expect { click_button "Submit" }.to change(Idea, :count).by(1)
-      end
-    end
-  end
-
   describe "idea destruction" do
-    before { FactoryGirl.create(:idea, user: user) }
+    
+    before { FactoryGirl.create(:idea, area: area, user: user) }
 
     describe "as correct user" do
       before { visit root_path }
@@ -70,7 +48,6 @@ describe "Idea pages" do
   end
 
   describe "show" do
-    let(:user) { FactoryGirl.create(:user) }
     let!(:i1) { FactoryGirl.create(:idea, user: user, title: "Title", content: "Foo") }
     let!(:c1) { FactoryGirl.create(:comment, user: user, commentable: i1) }
 
@@ -95,7 +72,6 @@ describe "Idea pages" do
   end
 
   describe "edit" do
-    let(:user) { FactoryGirl.create(:user) }
     let!(:i1) { FactoryGirl.create(:idea, user: user, title: "Title", content: "Foo") }
 
     before do
@@ -133,5 +109,13 @@ describe "Idea pages" do
       specify { expect(i1.reload.title).to  eq new_title }
       specify { expect(i1.reload.content).to eq new_content }
     end
+  end
+
+  describe "index" do
+    let!(:i1) { FactoryGirl.create(:idea, user: user, title: "Title", content: "Foo") }
+
+    before {visit ideas_path}
+    it { should have_title("All Ideas") }
+    it { should have_content(i1.title)}
   end
 end
