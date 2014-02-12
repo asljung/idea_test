@@ -4,6 +4,7 @@ IdeaTest::Application.routes.draw do
   resources :users
   resources :sessions, only: [:new, :create, :destroy]
   resources :areas
+  resources :uploads
   resources :ideas do
     resources :comments
   end

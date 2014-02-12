@@ -11,7 +11,10 @@
 // about supported directives.
 //
 //= require jquery
+//= require jquery.turbolinks
 //= require jquery_ujs
+//= require jquery-fileupload/basic
+//= require jquery-fileupload/vendor/tmpl
 //= require ckeditor/override
 //= require ckeditor/init
 //= require ckeditor/config
