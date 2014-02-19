@@ -1,0 +1,8 @@
+$("#upload_errors").hide(300);
+$("#flash_notice").addClass("alert alert-success");
+$("#flash_notice").html("<%= escape_javascript(flash[:notice])%>");
+$("#flash_notice").show(300);
+$("div").remove("#<%= escape_javascript(@upload.id.to_s)%>");
+setTimeout(function(){
+        $("#flash_notice").hide(300);
+    }, 3000);

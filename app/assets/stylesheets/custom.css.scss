@@ -362,3 +362,60 @@ div.pagination{
 .header-close-bot{
   margin-bottom: 0;
 }
+
+/*Styles for upload widget*/
+
+#upload {
+  background: $grayMediumLight;
+  margin-bottom: 10px;
+}
+
+#upload input {
+  visibility: hidden;
+}
+
+#upload .upload-list {
+  list-style: none;
+  padding: 15px;
+  li > * {
+    vertical-align: middle;
+  }
+  div {
+    display: inline-block;
+  }
+  li {
+    background: $gray-lighter;
+    padding: 10px;
+    &.working {
+      background: $gray-light;
+    }
+    p {
+      padding: 10px;
+      margin: 0;
+      width: 560px;
+      margin-left: 20px;
+      word-wrap: break-word;
+      i {
+        display: block;
+        font-weight: bold;
+      }
+    }
+    span {
+      display: inline-block;
+      margin-left: 40px;
+      &.glyphicon-ok {
+        color: #009900;
+      }
+      &.glyphicon-remove {
+        color: #CC0000;
+      }
+    }
+  }
+}
+
+#dropzone {
+  text-align: center;
+}
+#dropzone .title {
+  font-size: 1.4em;
+}

@@ -14,10 +14,12 @@ class IdeasController < ApplicationController
     @idea = Idea.find(params[:id])
     @comment = Comment.new
     @comments_all = @idea.comment_threads
+    @uploads = @idea.uploads
   end
 
   def create
   	@idea = current_user.ideas.build(idea_params)
+
     if @idea.save
       flash[:success] = "Idea submitted!"
       redirect_to root_url

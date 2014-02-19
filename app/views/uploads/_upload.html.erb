@@ -1,1 +1,6 @@
-<%= image_tag(@upload.uploaded_file(:thumb), class: 'thumb')  %>
+<div class="col-md-4" id="<%= upload.id %>">
+	<%= link_to image_tag(upload.uploaded_file(:thumb), class: 'img-thumbnail'), upload.uploaded_file(:large) %><br>
+	<%= link_to "Delete", idea_upload_path(upload.idea, upload), :remote => true, method: :delete,
+	                                   data: { confirm: "Are you sure you want to delete the file?" },
+	                                   title: "Delet file?", class: "glyphicon glyphicon-remove" %>
+</div>
