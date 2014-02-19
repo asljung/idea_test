@@ -31,12 +31,13 @@ gem 'uglifier', '2.4.0'
 gem 'coffee-rails', '4.0.1'
 gem 'jquery-rails', '3.0.4'
 gem 'turbolinks', '2.1.0'
+gem 'jquery-turbolinks'
 gem 'jbuilder', '1.0.2'
 gem 'therubyracer', :platform => :ruby
 gem 'ajax_pagination'
 gem 'paperclip'
 gem 'ckeditor'
-gem 'bootsy'
+gem 'jquery-fileupload-rails'
 
 group :doc do
   gem 'sdoc', '0.3.20', require: false

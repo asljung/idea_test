@@ -3,6 +3,8 @@ class Idea < ActiveRecord::Base
 	belongs_to :area
 	acts_as_commentable
 	has_many :comments
+	has_many :uploads, :dependent => :destroy
+	accepts_nested_attributes_for :uploads, :allow_destroy => true
 	default_scope -> { order('created_at DESC') }
 	validates :title, presence: true, length: { maximum: 80 }
 	validates :content, presence: true, length: { maximum: 2000 }

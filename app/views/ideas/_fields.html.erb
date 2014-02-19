@@ -1,13 +1,13 @@
 <%= render 'shared/error_messages', object: f.object %>
 <div class="form-group">
-<div class="col-md-6">
-<%= f.label :title %>
-<%= f.text_field :title, :class => "form-control" %>
-<%= f.label :area %>
-<%= f.collection_select :area_id, @current_areas, :id, :title, {:selected => @area_sel.id} %>
-</div>
-<div class="col-md-12">
-<%= f.label :content %>
-<%= f.cktext_area :content, :class => "form-control", :ckeditor => {:toolbar => 'mini'} %>
-</div>
+	<div class="col-md-6">
+		<%= f.label :title %>
+		<%= f.text_field :title, :class => "form-control" %>
+		<%= f.label :area %>
+		<%= f.collection_select :area_id, @current_areas, :id, :title, {:selected => @area_sel.id} %>
+	</div>
+	<div class="col-md-12">
+		<%= f.label :content %>
+		<%= f.cktext_area :content, :class => "form-control", :ckeditor => {:toolbar => 'mini'} %>
+	</div>
 </div>

@@ -6,7 +6,9 @@ IdeaTest::Application.routes.draw do
   resources :areas
   resources :ideas do
     resources :comments
+    resources :uploads
   end
+  
   root 'static_pages#home'
   match '/signup',  to: 'users#new',            via: 'get'
   match '/signin',  to: 'sessions#new',         via: 'get'
