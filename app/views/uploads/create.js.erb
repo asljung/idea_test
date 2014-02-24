@@ -2,8 +2,8 @@
   alert('Failed');
 <% else %>
   if ($('#files') !== undefined) {
-  	setTimeout(function(){
-    	$('#files').append("<%= j render(@upload) %>");
-    }, 3000);
+    jQuery(function() { $('a.swipebox').unbind("click");});
+    $('#files').append("<%= j render(@upload) %>");
+     jQuery(function() {$("a.swipebox").swipebox();});
   }
 <% end %>

@@ -16,6 +16,7 @@
 //= require jquery-fileupload/basic
 //= require jquery-fileupload/vendor/tmpl
 //= require jquery.knob
+//= require swipebox
 //= require ckeditor/override
 //= require ckeditor/init
 //= require ckeditor/config

@@ -38,6 +38,7 @@ gem 'ajax_pagination'
 gem 'paperclip'
 gem 'ckeditor'
 gem 'jquery-fileupload-rails'
+gem 'swipebox'
 
 group :doc do
   gem 'sdoc', '0.3.20', require: false
