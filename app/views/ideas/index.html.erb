@@ -12,5 +12,7 @@
 	<%= form_tag ideas_path, :method => 'get', :id => "idea_search"  do %>
      <%= text_field_tag :search,  params[:search], :placeholder => 'Search for title...'%> <%= submit_tag "Search", :name => nil, :class => "btn" %>
 	<% end %>
-  <%= render "shared/feed" %>
+  <%= render "shared/ideas", collection: @ideas %>
+  <%= link_to 'Load More Ideas', ideas_path(:page => @ideas.next_page, :search => @search), :class => 'load-more-ideas', :remote => true if @ideas.next_page
+ %>
 </div>

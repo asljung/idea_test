@@ -29,13 +29,11 @@
 		<% end %>
 	</div>
 	<h2 class="header-close-bot">Comments</h2>
-	<% if @comments_all.any? %>
-		<% @comments = @comments_all.paginate(:page => params[:page], :per_page => 10, :order => 'created_at DESC')%>
-		<%= will_paginate @comments %>
-	  <ol class="media-list">
-	    <%= render partial: "comment", collection: @comments, as: :comment %>
+	<% if @comments.any? %>
+	  <ol class="media-list comments">
+	    <%= render partial: "comment", collection: @comments %>
 		</ol>
-		<%= will_paginate @comments %>
+		<%= link_to 'Load More Comments', idea_path(:id => @idea.id, :page => @comments.next_page), :class => 'load-more-comments', :remote => true if @comments.next_page %>
 	<% end %>
 </div>
 <div class="col-md-4">

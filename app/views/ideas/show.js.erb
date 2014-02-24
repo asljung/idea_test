@@ -1,0 +1,7 @@
+$('.comments').append('<%= j render partial: "comment", collection: @comments %>');
+$('a.load-more-comments').attr('href', '<%= idea_path(:id => @idea.id, :page => @comments.next_page) %>');
+
+<% unless @comments.next_page %>
+	$('a.load-more-comments').remove();
+<% end %>
+

@@ -10,11 +10,13 @@ class Idea < ActiveRecord::Base
 	validates :content, presence: true, length: { maximum: 2000 }
 	validates :user_id, presence: true
 
+	self.per_page = 10
+
 	def self.search(search)
     if search
       where("ideas.title LIKE ? OR ideas.content LIKE ?", "%#{search}%", "%#{search}%")
     else
-      scoped
+      self.all
     end
   end
 end

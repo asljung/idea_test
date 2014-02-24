@@ -5,15 +5,18 @@ class IdeasController < ApplicationController
   before_action :selected_area, only: [:new, :create]
 
   def index
-    # @feed_items = current_ideas
-    @feed_items = current_ideas.search(params[:search])
+    @ideas = current_ideas.paginate(:page => params[:page])
     @search = params[:search]
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def show
     @idea = Idea.find(params[:id])
     @comment = Comment.new
-    @comments_all = @idea.comment_threads
+    @comments = @idea.comment_threads.paginate(:page => params[:page], :order => 'created_at DESC')
     @uploads = @idea.uploads
   end
 

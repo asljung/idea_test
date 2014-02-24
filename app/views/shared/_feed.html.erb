@@ -1,7 +1,0 @@
-<% if @feed_items.any? %>
-	<% @feed_items = @feed_items.paginate(:page => params[:page], :per_page => 10)%>
-  <ol class="media-list">
-    <%= render partial: 'shared/feed_item', collection: @feed_items %>
-  </ol>
-  <%= will_paginate @feed_items %>
-<% end %>
