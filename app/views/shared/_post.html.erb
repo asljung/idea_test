@@ -7,8 +7,9 @@
 
         <h4 class="media-heading"><%= link_to highlight(wrap(post.title), @search), idea_path(post.id) %></h4>
         <span class="content">  
-            <%= highlight(strip_tags(post.content.truncate(220)), @search) %>
-          </span>
+            <%= highlight(strip_tags(post.content.truncate(200)), @search) %>
+            <%= link_to 'Show more', idea_path(:id => post.id), :class => 'load_full_content', :remote => true %>
+        </span>
         <span class="timestamp">
           Posted <%= time_ago_in_words(post.created_at) %> ago by <%= link_to post.user.name, post.user %> in <%= link_to Area.find(post.area_id).title, Area.find(post.area_id) %>.
         </span>
@@ -20,6 +21,7 @@
                                            title: post.title, class: "glyphicon glyphicon-remove" %>
         <% end %>
         </span>
+        <div class="comments" style="display: none"><h2>Comments</h2><ol class="comment-list"></ol></div>
       </div>
 		</li>
 	</div>

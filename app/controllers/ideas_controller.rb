@@ -16,8 +16,13 @@ class IdeasController < ApplicationController
   def show
     @idea = Idea.find(params[:id])
     @comment = Comment.new
-    @comments = @idea.comment_threads.paginate(:page => params[:page], :order => 'created_at DESC')
+    @page = params[:page]
+    @comments = @idea.comment_threads.paginate(:page => @page, :order => 'created_at DESC')
     @uploads = @idea.uploads
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def create

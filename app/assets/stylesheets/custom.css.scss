@@ -168,9 +168,17 @@ input {
 
 /* ideas */
 
-.content {
+.content, .comment_content, .full_content, .hide_full_content {
   display: block;
 }
+
+.ideas .comments{
+  font-size: 0.8em;
+  h4 {
+    font-size: 1.2em;
+  }
+}
+
 .timestamp {
   color: $gray-light;
 }
@@ -218,7 +226,7 @@ aside {
   color: #FFFFFF;
 }
 
-.load-more-comments {
+ol.comments .load-more-comments {
   color: #FFFFFF;
 }
 
