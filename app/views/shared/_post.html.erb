@@ -13,6 +13,9 @@
         <span class="timestamp">
           Posted <%= time_ago_in_words(post.created_at) %> ago by <%= link_to post.user.name, post.user %> in <%= link_to Area.find(post.area_id).title, Area.find(post.area_id) %>.
         </span>
+        <span class="idea-stats">
+          <span><%= pluralize(post.comment_count, "Comment") %></span> | <span class="idea-votes"><%= pluralize(post.vote_count, "Upvote") %></span> <span class="vote-link"><%= link_to "", @vote_link[post.id], :class => 'glyphicon glyphicon-thumbs-up ' + @vote_class[post.id] , :remote => true %></span>
+        </span>
         <span class="pull-right post-actions">
         <% if current_user?(post.user) %>
         	<%= link_to "Edit", edit_idea_path(post.id), class: "glyphicon glyphicon-edit" %>

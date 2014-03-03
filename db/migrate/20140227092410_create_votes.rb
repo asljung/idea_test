@@ -5,7 +5,7 @@ class CreateVotes < ActiveRecord::Migration
       t.integer :idea_id
 
       t.timestamps
-    enduser_id
+    end
     add_index :votes, :user_id
     add_index :votes, :idea_id
     add_index :votes, [:user_id, :idea_id], unique: true

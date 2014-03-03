@@ -1,6 +1,8 @@
 class User < ActiveRecord::Base
   belongs_to :organisation
   has_many :ideas
+  has_many :votes
+  has_many :voted_ideas, through: :votes, source: :idea, :order => 'created_at'
 	before_save { self.email = email.downcase }
   before_create :create_remember_token
 	validates :name, presence: true, length: { maximum: 50 }
@@ -20,6 +22,16 @@ class User < ActiveRecord::Base
 
   def feed
     Idea.find(:all, :limit => 5, :order => 'created_at desc')
+  end
+
+  def vote!(idea)
+    votes.create!(idea_id: idea.id)
+    idea.increment!(:vote_count)
+  end
+
+  def unvote!(idea)
+    votes.find_by(idea_id: idea.id).destroy
+    idea.decrement!(:vote_count)
   end
 
   private

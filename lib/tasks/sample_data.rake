@@ -6,6 +6,7 @@ namespace :db do
     make_areas
     make_ideas
     make_comments
+    make_votes
   end
 end
 
@@ -50,6 +51,8 @@ def make_ideas
     5.times do
       title = Faker::Lorem.sentence(1)
       content = Faker::Lorem.sentence(50)
+      vote_count = 0
+      comment_count = 0
       area_id = area.id
       users.each { |user| user.ideas.create!(title: title, content: content, area_id: area_id) }
     end
@@ -65,8 +68,20 @@ def make_comments
       body = Faker::Lorem.sentence(20)
       commentable_id = idea.id
       users.each { |user| 
-        Comment.create!(title: title, body: body, commentable_id: commentable_id, commentable_type: "Idea", user_id: user.id) }
+        Comment.create(title: title, body: body, commentable_id: commentable_id, commentable_type: "Idea", user_id: user.id)
+        idea.increment!(:comment_count) 
+      }
     end
+  }
+end
+
+def make_votes
+  users = User.all(limit: 6)
+  ideas = Idea.all
+  users.each { |user|
+    ideas.each{ |idea|
+      user.vote!(idea)
+    }
   }
 end
 

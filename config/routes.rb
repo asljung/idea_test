@@ -1,7 +1,10 @@
 IdeaTest::Application.routes.draw do
   mount Ckeditor::Engine => '/ckeditor'
   resources :organisations
-  resources :users
+  resources :users do
+    get :vote, :on => :member
+    get :unvote, :on => :member
+  end
   resources :sessions, only: [:new, :create, :destroy]
   resources :areas
   resources :ideas do
@@ -17,6 +20,8 @@ IdeaTest::Application.routes.draw do
   match '/about',   to: 'static_pages#about',   via: 'get'
   match '/contact', to: 'static_pages#contact', via: 'get'
   match '/submit',  to: 'ideas#new',            via: 'get'
+  match "users/:id/vote" => "users#vote", :as => "user_vote", via: 'post'
+  match "users/:id/unvote" => "users#unvote", :as => "user_unvote", via: 'post'
 
 
   # The priority is based upon order of creation: first created -> highest priority.

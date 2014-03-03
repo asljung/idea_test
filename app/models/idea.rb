@@ -5,7 +5,9 @@ class Idea < ActiveRecord::Base
 	has_many :comments
 	has_many :uploads, :dependent => :destroy
 	accepts_nested_attributes_for :uploads, :allow_destroy => true
-	default_scope -> { order('created_at DESC') }
+  has_many :votes, dependent: :destroy
+  has_many :voters, through: :votes, source: :user
+	default_scope -> { order('ideas.created_at DESC') }
 	validates :title, presence: true, length: { maximum: 80 }
 	validates :content, presence: true, length: { maximum: 2000 }
 	validates :user_id, presence: true
@@ -18,5 +20,9 @@ class Idea < ActiveRecord::Base
     else
       self.all
     end
+  end
+
+  def voted?(user)
+    votes.find_by(user_id: user.id)
   end
 end

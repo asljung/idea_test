@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140212094858) do
+ActiveRecord::Schema.define(version: 20140227143700) do
 
   create_table "areas", force: true do |t|
     t.string   "title"
@@ -58,11 +58,13 @@ ActiveRecord::Schema.define(version: 20140212094858) do
 
   create_table "ideas", force: true do |t|
     t.string   "title"
-    t.text     "content",    limit: 255
+    t.text     "content",       limit: 255
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "area_id"
+    t.integer  "vote_count"
+    t.integer  "comment_count"
   end
 
   add_index "ideas", ["area_id"], name: "index_ideas_on_area_id"
@@ -102,5 +104,16 @@ ActiveRecord::Schema.define(version: 20140212094858) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["organisation_id"], name: "index_users_on_organisation_id"
   add_index "users", ["remember_token"], name: "index_users_on_remember_token"
+
+  create_table "votes", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "idea_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "votes", ["idea_id"], name: "index_votes_on_idea_id"
+  add_index "votes", ["user_id", "idea_id"], name: "index_votes_on_user_id_and_idea_id", unique: true
+  add_index "votes", ["user_id"], name: "index_votes_on_user_id"
 
 end

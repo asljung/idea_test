@@ -22,6 +22,7 @@ FactoryGirl.define do
     content "Lorem ipsum"
     area
     user
+    vote_count 0
   end
 
   factory :comment do

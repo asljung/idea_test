@@ -18,6 +18,8 @@ describe User do
   it { should respond_to(:authenticate) }
   it { should respond_to(:admin) }
   it { should respond_to(:ideas) }
+  it { should respond_to(:votes) }
+  it { should respond_to(:voted_ideas) }
 
   it { should be_valid }
   it { should_not be_admin }
@@ -133,6 +135,20 @@ describe User do
 
     it "should have the right ideas in the right order" do
       expect(@user.ideas.to_a).to eq [newer_idea, older_idea]
+    end
+  end
+
+  describe "voting" do
+    let(:idea) { FactoryGirl.create(:idea) }
+    before do
+      @user.save
+      @user.vote!(idea)
+    end
+    its(:voted_ideas) { should include(idea) }
+
+    describe "and unvoting" do
+      before { @user.unvote!(idea) }
+      its(:voted_ideas) { should_not include(idea) }
     end
   end
 

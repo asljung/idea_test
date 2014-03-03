@@ -23,6 +23,7 @@ jQuery ->
     $('li#' + String(id) + ' .comments').hide()
     $('li#' + String(id) + ' .content').show()
     return
+    
   show_full_content = (id) ->
     $('li#' + String(id) + ' .content').hide()
     $('li#' + String(id) + ' .full_content').show()

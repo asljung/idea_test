@@ -14,7 +14,7 @@
       </div>
       <% if @ideas.any? %> 
       <h2>Latest Ideas</h2>   
-        <ol class="media-list">
+        <ol class="media-list ideas">
           <%= render partial: "shared/post", collection: @ideas, as: :post %>
         </ol>
       <% end %>

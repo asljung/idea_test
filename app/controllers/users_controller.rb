@@ -2,6 +2,7 @@ class UsersController < ApplicationController
   before_action :signed_in_user, only: [:index, :edit, :update]
   before_action :correct_user,   only: [:edit, :update]
   before_action :admin_user,     only: :destroy
+  before_action :vote_params,    only: [:vote, :unvote]
 
   def index
     @users = User.paginate(page: params[:page])
@@ -45,11 +46,19 @@ class UsersController < ApplicationController
     redirect_to users_url
   end
 
+  def vote
+    @user.vote!(@idea)
+  end
+
+  def unvote 
+    @user.unvote!(@idea)
+  end
+
   private
 
     def user_params
       params.require(:user).permit(:name, :email, :password,
-                                   :password_confirmation)
+                                   :password_confirmation, :idea_id)
     end
 
     # Before filters
@@ -61,5 +70,10 @@ class UsersController < ApplicationController
 
     def admin_user
       redirect_to(root_url) unless current_user.admin?
+    end
+
+    def vote_params
+      @user = User.find(params[:id])
+      @idea = Idea.find(params[:idea_id])
     end
 end

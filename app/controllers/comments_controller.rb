@@ -15,6 +15,8 @@ class CommentsController < ApplicationController
 	  @current_user ||= User.find(session[:user_id]) if session[:user_id]
 	  @commentable = Comment.find_commentable(params[:comment][:commentable_type], params[:comment][:commentable_id])
 	 	@comment.commentable = @commentable
+    Rails.logger.debug("My object: #{@commentable.inspect}")
+    @commentable.increment!(:comment_count)
 	  @comment.user_id = @current_user.id
 	  if @comment.save
 	  	flash[:success] = 'Comment submitted.'

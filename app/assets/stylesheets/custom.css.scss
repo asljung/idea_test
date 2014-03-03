@@ -186,6 +186,20 @@ input {
   float: left;
   margin-right: 10px;
 }
+.idea-stats{
+  display: block;
+}
+a.voted{
+  text-decoration: none;
+  font-weight: bold;
+}
+a.unvoted {
+  text-decoration: none;
+}
+.unvoted{ 
+  color: $gray-dark;
+  a:hover{color: #2a6496;}
+}
 aside {
   textarea {
     height: 100px;
