@@ -20,10 +20,6 @@ class User < ActiveRecord::Base
     Digest::SHA1.hexdigest(token.to_s)
   end
 
-  def feed
-    Idea.find(:all, :limit => 5, :order => 'created_at desc')
-  end
-
   def vote!(idea)
     votes.create!(idea_id: idea.id)
     idea.increment!(:vote_count)

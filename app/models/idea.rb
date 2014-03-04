@@ -7,7 +7,6 @@ class Idea < ActiveRecord::Base
 	accepts_nested_attributes_for :uploads, :allow_destroy => true
   has_many :votes, dependent: :destroy
   has_many :voters, through: :votes, source: :user
-	default_scope -> { order('ideas.created_at DESC') }
 	validates :title, presence: true, length: { maximum: 80 }
 	validates :content, presence: true, length: { maximum: 2000 }
 	validates :user_id, presence: true

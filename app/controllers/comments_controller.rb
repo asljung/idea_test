@@ -3,7 +3,7 @@ class CommentsController < ApplicationController
 	before_action :signed_in_user, only: :create
 
 	def index
-	  @comments_all = @idea.comment_threads
+	  @comments = @idea.comment_threads.paginate(:page => params[:page], :order => 'created_at DESC')
 	end
 
 	def new
@@ -15,7 +15,6 @@ class CommentsController < ApplicationController
 	  @current_user ||= User.find(session[:user_id]) if session[:user_id]
 	  @commentable = Comment.find_commentable(params[:comment][:commentable_type], params[:comment][:commentable_id])
 	 	@comment.commentable = @commentable
-    Rails.logger.debug("My object: #{@commentable.inspect}")
     @commentable.increment!(:comment_count)
 	  @comment.user_id = @current_user.id
 	  if @comment.save

@@ -3,8 +3,12 @@ class StaticPagesController < ApplicationController
   	if signed_in?
       # Following line is for the idea_form partial
       @idea  = current_user.ideas.build
-      @ideas = current_ideas.limit(5)
-      @feed_items = current_user.feed.paginate(page: params[:page])
+      limit = 10
+      ideas = current_ideas.joins(:user).select('ideas.*, ideas.created_at as activity_date, users.name').order('activity_date DESC').limit(limit)
+      comments = current_ideas.joins("INNER JOIN comments ON commentable_id = ideas.id INNER JOIN users ON users.id = comments.user_id").select("ideas.*, comments.created_at as activity_date, comments.title as comment, users.name").where('comments.commentable_type' => 'Idea').group('ideas.id').order('activity_date DESC').limit(limit)
+      @combined_sorted = (ideas + comments).sort_by(&:activity_date).reverse.first(limit)
+      @ideas = @combined_sorted.uniq { |h| h[:id] }
+
       @vote_link = []
       @vote_class = []
       @ideas.each { |idea|
@@ -18,10 +22,10 @@ class StaticPagesController < ApplicationController
         @vote_link[idea.id] = @link
         @vote_class[idea.id] = @class
       }
-    respond_to do |format|
-      format.html
-      format.js
-    end
+      respond_to do |format|
+        format.html
+        format.js
+      end
     end
   end
 

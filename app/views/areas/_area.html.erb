@@ -1,5 +1,7 @@
-<div class="col-md-4">
-	<h2><%= area.title %></h2>
-	<p><%= area.description %></p>
-	<p><a class="btn btn-default" href="<%= area_path(area) %>">View area</a></p>
+<div class="panel panel-default">
+  <div class="panel-body">
+    <h3><%= area.title %></h3>
+    <p><%= area.description %></p>
+    <p><a href="<%= area_path(area) %>"><%= area.ideas.count %> Ideas</a> | <a href="<%= submit_path(:area_id => area.id) %>">Submit Idea</a></p>
+  </div>
 </div>

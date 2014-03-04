@@ -28,6 +28,7 @@ class IdeasController < ApplicationController
 
   def show
     @idea = Idea.find(params[:id])
+    logger.debug @idea.content
     @comment = Comment.new
     @page = params[:page]
     @comments = @idea.comment_threads.paginate(:page => @page, :order => 'created_at DESC')

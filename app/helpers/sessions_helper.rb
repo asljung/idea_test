@@ -32,7 +32,7 @@ module SessionsHelper
   end
 
   def current_ideas 
-    @current_ideas = Idea.joins(area: :organisation).where(organisations: {id: current_org.id}).order(:created_at)
+    @current_ideas = Idea.joins(area: :organisation).where(organisations: {id: current_org.id})
   end
 
   def signed_in_user

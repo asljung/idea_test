@@ -179,15 +179,16 @@ input {
   }
 }
 
+.comment_list li{
+  margin: 0;
+}
+
 .timestamp {
   color: $gray-light;
 }
 .gravatar {
   float: left;
   margin-right: 10px;
-}
-.idea-stats{
-  display: block;
 }
 a.voted{
   text-decoration: none;

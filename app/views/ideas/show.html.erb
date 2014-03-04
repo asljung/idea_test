@@ -28,8 +28,8 @@
 			</div>
 		<% end %>
 	</div>
-	<h2 class="header-close-bot">Comments</h2>
 	<% if @comments.any? %>
+	<h2 class="header-close-bot">Comments</h2>
 	  <ol class="media-list comments">
 	    <%= render partial: "comment", collection: @comments %>
 		</ol>

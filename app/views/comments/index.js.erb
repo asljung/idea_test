@@ -1,0 +1,18 @@
+var $idea = $("li#<%= @idea.id %>");
+$idea.find('.comments').show();
+$idea.find('ol.comment-list').append('<%= j render partial: "comment", collection: @comments %>');
+
+var $load_link = $idea.find('a.load-more-comments');
+if ($load_link.length){
+  $idea.find('a.load-more-comments').attr('href', '<%= idea_comments_path(@idea, :page => @comments.next_page) %>'); 
+}
+else{
+  $idea.find('a.comment_link').attr('href', '#')
+  $idea.find('a.comment_link').removeClass('comment_link').addClass('hide_comments')
+  $idea.find('ol.comment-list').after('<%= link_to "Show More Comments", 
+            idea_comments_path(@idea, :page => @comments.next_page), 
+            :class => "load-more-comments", :remote => true if @comments.next_page %>');
+}
+<% unless @comments.next_page %>
+  $('a.load-more-comments').remove();
+<% end %>    

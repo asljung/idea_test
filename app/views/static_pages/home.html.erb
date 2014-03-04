@@ -1,25 +1,23 @@
 <% if signed_in? %>
   <% provide(:title, @current_org.name) %>
 <div class="row">
-    <div class="col-md-3 well">
-        <a href="/submit"><button type="button" class="btn btn-lg btn-primary">Submit an Idea</button></a>
-        <hr>
-        <h3>Areas</h3>
-        <%= render 'shared/area_menu' %>
-    </div>
-    <div class="col-md-9">
+  <div class="col-md-8">
       <div class="jumbotron">
       <h1><%= @current_org.name %></h1>
       <p><%= @current_org.description %></p>
       </div>
       <% if @ideas.any? %> 
-      <h2>Latest Ideas</h2>   
+      <h2>Activity Feed</h2>   
         <ol class="media-list ideas">
-          <%= render partial: "shared/post", collection: @ideas, as: :post %>
+          <%= render partial: "shared/activity_feed", collection: @ideas %>
         </ol>
       <% end %>
-    </div>
   </div>
+  <div class="col-md-4 col-sm-6">
+      <h2>Challenges</h2>
+      <%= render 'shared/area_menu' %>
+  </div>
+</div>
 <% else %>
   <%= render 'shared/landing' %>
 <% end %>

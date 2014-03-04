@@ -15,46 +15,33 @@ $ ->
     $.getScript $(this).attr('href')
 
 jQuery ->
-	$("a.swipebox").swipebox()
-
-
-	hide_full_content = (id) ->
-    $('li#' + String(id) + ' .full_content').hide()
-    $('li#' + String(id) + ' .comments').hide()
-    $('li#' + String(id) + ' .content').show()
-    return
-    
-  show_full_content = (id) ->
-    $('li#' + String(id) + ' .content').hide()
-    $('li#' + String(id) + ' .full_content').show()
-    $('li#' + String(id) + ' .comments').hide()
-    $('li#' + String(id) + ' .show_comments').show()
-    $('li#' + String(id) + ' .hide_comments').hide()
-    return
+  $("a.swipebox").swipebox()
 
   $(document).on 'click', 'a.hide_full_content', (e) ->
-    hide_full_content($(this).closest("li").attr("id"))
+    $idea = $(this).closest("li")
+    $idea.find('.full_content').hide()
+    $idea.find('.content').show()
     e.preventDefault()
     return
 
   $(document).on 'click', 'a.show_full_content', (e) ->
-    show_full_content($(this).closest("li").attr("id"))
+    $idea = $(this).closest("li")
+    $idea.find('.content').hide()
+    $idea.find('.full_content').show()
     e.preventDefault()
     return
 
   $(document).on 'click', 'a.show_comments', (e) ->
-    $idea =  $(this).closest("li");
-    $idea.find('.comments').show();
-    $idea.find('.show_comments').hide();
-    $idea.find('.hide_comments').show();
+    $idea =  $(this).closest("li")
+    $idea.find('.comments').show()
+    $(this).removeClass('show_comments').addClass('hide_comments')
     e.preventDefault()
     return
 
   $(document).on 'click', 'a.hide_comments', (e) ->
-    $idea =  $(this).closest("li");
-    $idea.find('.comments').hide();
-    $idea.find('.show_comments').show();
-    $idea.find('.hide_comments').hide();
+    $idea =  $(this).closest("li")
+    $idea.find('.comments').hide()
+    $(this).removeClass('hide_comments').addClass('show_comments')
     e.preventDefault()
     return
   return

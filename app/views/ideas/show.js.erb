@@ -1,27 +1,11 @@
 var $ideas = $('ol.ideas');
 if ($ideas.length){
   var $idea = $("li#<%= @idea.id %>"); 
-  var $comments = $idea.find("a.load_full_content"); 
-  if ($comments.length) {
-    $idea.find('.content').after('<span class="full_content"><%= @idea.content %></span>');
-    $idea.find('.full_content').append('<a href="#" class="hide_full_content">Hide</a>');
-    $idea.find('.content').append('<a href="#" class="show_full_content">Show more</a>');
-    $idea.find('.load_full_content').remove();
-    $idea.find('.content').hide();
-    $idea.find('.full_content').append('<a href="#" class="show_comments">Show comments</a>')
-    $idea.find('.full_content').append('<a href="#" class="hide_comments" style="display: none">Hide comments</a>');
-    $idea.find('ol.comment-list').append('<%= j render partial: "comment", collection: @comments %>');
-    $idea.find('ol.comment-list').after('<%= link_to "Show More Comments", 
-            idea_path(:id => @idea.id, :page => @comments.next_page), 
-            :class => "load-more-comments", :remote => true if @comments.next_page %>'); 
-  }
-  else{
-    $idea.find('ol.comment-list').append('<%= j render partial: "comment", collection: @comments %>');
-    $idea.find('a.load-more-comments').attr('href', '<%= idea_path(:id => @idea.id, :page => @comments.next_page) %>'); 
-    <% unless @comments.next_page %>
-      $('a.load-more-comments').remove();
-    <% end %>
-  }
+  $idea.find('.content').after("<span class='full_content'><%= j raw(@idea.content) %></span>");
+  $idea.find('.full_content').append('<a href="#" class="hide_full_content">Hide</a>');
+  $idea.find('.content').append('<a href="#" class="show_full_content">Show more</a>');
+  $idea.find('.load_full_content').remove();
+  $idea.find('.content').hide();
 }
 else{
 	$('.comments').append('<%= j render partial: "comment", collection: @comments %>');
