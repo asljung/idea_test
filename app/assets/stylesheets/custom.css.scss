@@ -62,6 +62,10 @@ p {
   line-height: 1.7em;
 }
 
+hr {
+  clear: both;
+}
+
 
 /* header */
 
@@ -179,6 +183,10 @@ p.activity {
   display: block;
 }
 
+.img-thumbnail {
+  margin-bottom: 20px;
+}
+
 .ideas .comments{
   font-size: 0.8em;
   h4 {
@@ -186,8 +194,8 @@ p.activity {
   }
 }
 
-.ideas .media-object{
-  padding-right: 15px;
+.idea-info{
+  clear:both;
 }
 
 .comment_list li{
@@ -196,10 +204,11 @@ p.activity {
 
 .timestamp {
   color: $gray-light;
+  clear: both;
 }
-.gravatar {
-  float: left;
-  margin-right: 10px;
+.thumb-list {
+  margin-right: 15px;
+  margin-bottom: 10px;
 }
 a.voted{
   text-decoration: none;
@@ -256,6 +265,11 @@ ol.comments .load-more-comments {
   color: #FFFFFF;
 }
 
+/* Comments */
+
+#comment-submit {
+
+}
 
 @media (min-width:768px) { 
   #page-content {
@@ -269,13 +283,13 @@ ol.comments .load-more-comments {
   }
 }
 
-.post-actions a{
-  margin-left: 10px;
+.idea-actions {
+  margin-bottom: 10px;
+  a{ margin-left: 10px;}
 }
 
 .comment-panel{
-  padding-bottom: 15px;
-  margin-top: 90px;
+  padding: 15px;
 }
 
 div.pagination{

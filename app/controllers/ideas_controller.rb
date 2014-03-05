@@ -36,6 +36,13 @@ class IdeasController < ApplicationController
     @page = params[:page]
     @comments = @idea.comment_threads.paginate(:page => @page, :order => 'created_at DESC')
     @uploads = @idea.uploads
+    if @idea.voted?(current_user) 
+        @vote_link = user_unvote_path(:id => current_user.id, :idea_id => @idea.id)
+        @vote_class = "voted"
+      else
+        @vote_link = user_vote_path(:id => current_user.id, :idea_id => @idea.id)
+        @vote_class = "unvoted"
+      end
     respond_to do |format|
       format.html
       format.js

@@ -1,0 +1,2 @@
+$('ol.media-list.comments').closest('div').children('h3').text("<%= pluralize(@idea.comment_count, "Comment") %>")
+$('ol.media-list.comments').prepend('<%= j render @comment %>');

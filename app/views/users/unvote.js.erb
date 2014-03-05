@@ -1,4 +1,7 @@
-var $idea = $("li#<%= @idea.id %>"); 
+var $idea = $(".ideas li#<%= @idea.id %>");
+if (!$idea.length){
+  $idea = $(document);
+}
 $idea.find('.idea-votes').replaceWith('<span class="idea-votes"><%= pluralize(@idea.vote_count, "Upvote") %>')
 $idea.find('.vote-link a').attr('href', '<%= user_vote_path(:id => current_user.id, :idea_id => @idea.id) %>');
 $idea.find('.vote-link a').removeClass("voted");

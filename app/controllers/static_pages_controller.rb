@@ -5,7 +5,7 @@ class StaticPagesController < ApplicationController
       @idea  = current_user.ideas.build
       limit = 10
       ideas = current_ideas.joins(:user).select('ideas.*, ideas.created_at as activity_date, users.name').order('activity_date DESC').limit(limit)
-      comments = current_ideas.joins("INNER JOIN comments ON commentable_id = ideas.id INNER JOIN users ON users.id = comments.user_id").select("ideas.*, comments.created_at as activity_date, comments.title as comment, users.name").where('comments.commentable_type' => 'Idea').group('ideas.id').order('activity_date DESC').limit(limit)
+      comments = current_ideas.joins("INNER JOIN comments ON commentable_id = ideas.id INNER JOIN users ON users.id = comments.user_id").select("ideas.*, comments.created_at as activity_date, comments.id as comment, users.name").where('comments.commentable_type' => 'Idea').group('ideas.id').order('activity_date DESC').limit(limit)
       @combined_sorted = (ideas + comments).sort_by(&:activity_date).reverse.first(limit)
       @ideas = @combined_sorted.uniq { |h| h[:id] }
 

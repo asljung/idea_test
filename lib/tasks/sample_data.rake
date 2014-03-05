@@ -64,7 +64,6 @@ def make_comments
   ideas = Idea.all
   ideas.each { |idea|
     5.times do
-      title = Faker::Lorem.sentence(1)
       body = Faker::Lorem.sentence(20)
       commentable_id = idea.id
       users.each { |user| 

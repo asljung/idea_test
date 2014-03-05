@@ -17,6 +17,11 @@ $ ->
 jQuery ->
   $("a.swipebox").swipebox()
 
+  $('#comment_body').keypress (e) ->
+    if e.keyCode == 13 && !e.shiftKey
+      e.preventDefault()
+      $(this).closest("form").submit()  
+
   $(document).on 'click', 'a.hide_full_content', (e) ->
     $idea = $(this).closest("li")
     $idea.find('.full_content').hide()

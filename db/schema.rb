@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140227143700) do
+ActiveRecord::Schema.define(version: 20140305115640) do
 
   create_table "areas", force: true do |t|
     t.string   "title"
@@ -42,9 +42,7 @@ ActiveRecord::Schema.define(version: 20140227143700) do
   create_table "comments", force: true do |t|
     t.integer  "commentable_id",   default: 0
     t.string   "commentable_type"
-    t.string   "title"
     t.text     "body"
-    t.string   "subject"
     t.integer  "user_id",          default: 0, null: false
     t.integer  "parent_id"
     t.integer  "lft"

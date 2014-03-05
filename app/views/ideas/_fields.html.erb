@@ -3,11 +3,11 @@
 	<div class="col-md-6">
 		<%= f.label :title %>
 		<%= f.text_field :title, :class => "form-control" %>
-		<%= f.label :area %>
+		<%= f.label :area_id, "Challenge"%>
 		<%= f.collection_select :area_id, @current_areas, :id, :title, {:selected => @area_sel.id} %>
 	</div>
 	<div class="col-md-12">
-		<%= f.label :content %>
+		<%= f.label :content, "Description" %>
 		<%= f.cktext_area :content, :class => "form-control", :ckeditor => {:toolbar => 'mini'} %>
 	</div>
 </div>

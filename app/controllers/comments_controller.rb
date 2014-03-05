@@ -17,13 +17,18 @@ class CommentsController < ApplicationController
 	 	@comment.commentable = @commentable
     @commentable.increment!(:comment_count)
 	  @comment.user_id = @current_user.id
+    @idea = @commentable
 	  if @comment.save
-	  	flash[:success] = 'Comment submitted.'
-	    redirect_to @commentable
-	  else
-	    flash[:error] = 'Comment was not submitted.'
-	    redirect_to @commentable
-	  end
+      flash[:success] = 'Comment submitted.'
+    else
+      flash[:error] = 'Comment was not submitted.'
+    end
+    respond_to do |format|
+      format.html {
+        redirect_to @commentable
+      }
+      format.js
+    end
 	end
 
 	def get_idea
@@ -32,6 +37,6 @@ class CommentsController < ApplicationController
 
 	private
 		def comment_params
-    	params.require(:comment).permit(:title, :body, :commentable_type, :commentable_id)
+    	params.require(:comment).permit(:body, :commentable_type, :commentable_id)
   	end
 end

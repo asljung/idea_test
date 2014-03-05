@@ -1,20 +1,12 @@
-<div class="panel panel-default col-md-12 comment-panel well">
-  <div class="row">
+<div class="panel panel-default comment-panel">
   <h2>Post a Comment</h2>
-  <%= form_for [@idea, @comment] do |f| %>
-    <div class="form-group">
-			<div class="col-md-12">
-				<%= f.label "Title" %><br>
-				<%= f.text_field :title, :class => "form-control"  %>
-				<%= f.label "Comment" %><br>
-				<%= f.text_area :body, :class => "form-control", size: "60x6" %>
+  <%= form_for([@idea, @comment], remote: true, :html => {:class => "form-inline"}) do |f| %>
+    <div class="input-group text-center">
+				<%= f.text_area :body, :class => "form-control input-lg" %>
 				<%= f.hidden_field :commentable_type, :value => "Idea"%>
-	      <%= f.hidden_field :commentable_id, :value => @idea.id%>	
-			</div>
-		</div>
-		<div class="col-md-8 col-md-offset-2">
-			<%= f.submit "Post Comment", class: "btn btn-lg btn-primary form-control" %>
-		</div>
+	      <%= f.hidden_field :commentable_id, :value => @idea.id%>
+        <span class="input-group-btn">	
+	      <%= f.submit "Send", class: "btn btn-lg btn-primary", id: "comment-submit" %></span>
+    </div>
 	<% end %>
-	</div>
 </div>

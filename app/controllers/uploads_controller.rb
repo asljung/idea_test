@@ -1,5 +1,7 @@
 class UploadsController < ApplicationController
   before_action :set_upload, only: [:show, :destroy]
+  before_action :signed_in_user
+  before_action :correct_user,   only: [:destroy]
 
   # GET /uploads
   # GET /uploads.json
@@ -60,6 +62,11 @@ class UploadsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_upload
       @upload = Upload.find(params[:id])
+    end
+
+    def correct_user
+      @upload = current_user.uploads.find_by(id: params[:id])
+      redirect_to root_url if @upload.nil?
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

@@ -1,7 +1,6 @@
 class Comment < ActiveRecord::Base
   acts_as_nested_set :scope => [:commentable_id, :commentable_type]
 
-  validates :title, :presence => true
   validates :body, :presence => true
 
   # NOTE: install the acts_as_votable plugin if you

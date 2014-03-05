@@ -7,25 +7,27 @@
       <h4><%= link_to highlight(wrap(idea.title), @search), idea_path(idea.id) %></h4>
     </div>
     <div class="panel-body">
-  		<div class="media-object pull-left">
-        <% if @images && @images[idea.id] %><%= image_tag(@images[idea.id]) %><% end %>
-  		</div>
-  		<div class="media-body">
+      <% if @images && @images[idea.id] %>
+    		<div class="media-object pull-left thumb-list"><%= image_tag(@images[idea.id]) %></div>
+      <% end %>
+  		<div class="idea-body">
         <span class="content">  
-            <%= highlight(strip_tags(idea.content.truncate(200)), @search) %>
+            <%= highlight(strip_tags(idea.content.truncate(400)), @search) %>
             <%= link_to 'Show more', idea_path(:id => idea.id), :class => 'load_full_content', :remote => true %>
         </span>
+        </div>
+        <div class="idea-info">
         <span class="timestamp">
           Posted <%= time_ago_in_words(idea.created_at) %> ago by <%= link_to idea.user.name, idea.user %> in <%= link_to Area.find(idea.area_id).title, Area.find(idea.area_id) %>.
         </span>
-      </br>
+        </br>
         <span>
           <span><% if idea.comment_count %>
             <%= link_to pluralize(idea.comment_count, "Comment"), idea_comments_path(idea), :class => 'comment_link', :remote => true %>
             <% else %>0 Comments<% end %>
           </span> | <span class="idea-votes"><%= pluralize(idea.vote_count, "Upvote") %></span> <span class="vote-link"><%= link_to "", @vote_link[idea.id], :class => 'glyphicon glyphicon-thumbs-up ' + @vote_class[idea.id] , :remote => true %></span>
         </span>
-        <span class="pull-right post-actions">
+        <span class="pull-right idea-actions">
         <% if current_user?(idea.user) %>
         	<%= link_to "Edit", edit_idea_path(idea.id), class: "glyphicon glyphicon-edit" %>
           <%= link_to "Delete", idea, method: :delete,
@@ -33,8 +35,9 @@
                                            title: idea.title, class: "glyphicon glyphicon-remove" %>
         <% end %>
         </span>
-        <div class="comments" style="display: none"><h2>Comments</h2><ol class="comment-list"></ol></div>
       </div>
+        <div class="comments" style="display: none"><h2>Comments</h2><ol class="comment-list"></ol></div>
+      
     </div>
   </div>
 </li>

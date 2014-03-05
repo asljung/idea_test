@@ -4,7 +4,16 @@
 	  <h1><%= @idea.title %></h1>
 	  <hr>
 	  <%= raw(@idea.content) %>
+	  <% if current_user?(@idea.user) %>
+		  <div class="pull-right idea-actions">
+		  	<%= link_to "Edit", edit_idea_path(@idea), class: "glyphicon glyphicon-edit" %>
+		  	<%= link_to "Delete", @idea, method: :delete,
+	                                   data: { confirm: "Are you sure you want to delete the idea?" },
+	                                   title: @idea.title, class: "glyphicon glyphicon-remove" %>
+			</div>
+		<% end %>
 	  <hr>
+	  <% if current_user?(@idea.user) %>
 	  <div id="upload">
 	  	<div id="dropzone">
 	  		<input data-url="/ideas/<%= @idea.id %>/uploads" id="uploaded_file" name="upload[uploaded_file]" multiple="" type="file"></input>
@@ -13,23 +22,17 @@
 	  	</div>
 	  	<div class="upload-list"></div>
 	  </div>
+	  <% end %>
 	  <div id="files">
 	  	<div id="flash_notice"></div>
 	  	<%= render partial: "uploads/upload", collection: @uploads, as: :upload %>
 	  </div>
-	  <div class="row"></div>
 	  <hr>
-	  <% if current_user?(@idea.user) %>
-		  <div class="pull-right post-actions">
-		  	<%= link_to "Edit", edit_idea_path(@idea), class: "glyphicon glyphicon-edit" %>
-		  	<%= link_to "Delete", @idea, method: :delete,
-	                                   data: { confirm: "Are you sure you want to delete the idea?" },
-	                                   title: @idea.title, class: "glyphicon glyphicon-remove" %>
-			</div>
-		<% end %>
-	</div>
+	  </div>
+	  <%= render "shared/comment_form" %>
+	
 	<% if @comments.any? %>
-	<h2 class="header-close-bot">Comments</h2>
+	<h3 class="header-close-bot"><%= pluralize(@idea.comment_count, "Comment") %></h3>
 	  <ol class="media-list comments">
 	    <%= render partial: "comment", collection: @comments %>
 		</ol>
@@ -37,6 +40,17 @@
 	<% end %>
 </div>
 <div class="col-md-4">
-	<%= render "shared/comment_form" %>
+	<div class="idea-info well">
+    <p>Author: <%= link_to @idea.user.name, @idea.user %></p>
+    <p>Challenge: <%= link_to Area.find(@idea.area_id).title, Area.find(@idea.area_id) %></p>
+    <p>Posted: <%= @idea.created_at %></p>
+    </br>
+    <span><% if @idea.comment_count %>
+      <%= pluralize(@idea.comment_count, "Comment")%>
+      <% else %>0 Comments<% end %>
+    </span> | 
+    <span class="idea-votes"><%= pluralize(@idea.vote_count, "Upvote") %></span> 
+    <span class="vote-link"><%= link_to "", @vote_link, :class => 'glyphicon glyphicon-thumbs-up ' + @vote_class , :remote => true %></span>  
+  </div>
 </div>
 
