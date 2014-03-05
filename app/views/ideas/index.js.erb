@@ -1,4 +1,4 @@
-$('.ideas').append('<%= j render partial: "shared/post", collection: @ideas %>');
+$('.ideas').append('<%= j render partial: "shared/idea", collection: @ideas %>');
 $('a.load-more-ideas').attr('href', '<%= ideas_path(:page => @ideas.next_page, :search => params[:search]) %>');
 
 <% unless @ideas.next_page %>

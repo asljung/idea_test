@@ -14,8 +14,8 @@
       <% if @ideas_all.any? %>
       <% @ideas = @ideas_all.paginate(:page => params[:page], :per_page => 10, :order => 'created_at DESC')%>
       <%= will_paginate @ideas %>
-      <ol class="media-list">
-        <%= render partial: "shared/post", collection: @ideas, as: :post %>
+      <ol class="media-list ideas">
+        <%= render partial: "shared/idea", collection: @ideas, as: :idea %>
       </ol>
       <%= will_paginate @ideas %>
       <% end %>
