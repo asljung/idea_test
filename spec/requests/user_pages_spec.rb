@@ -56,7 +56,12 @@ describe "User pages" do
 
   describe "signup page" do
 
-    before { visit signup_path }
+    before do 
+      visit signup_path
+      let!(:org) do
+        FactoryGirl.create(:organisation)
+      end
+    end
 
     let(:submit) { "Create my account" }
 

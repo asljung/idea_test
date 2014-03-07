@@ -1,8 +1,10 @@
 <% provide(:title, @idea.title) %>
 <div class="col-md-8">
-	<div class="row">
-	  <h1><%= @idea.title %></h1>
-	  <hr>
+	
+    <div class="panel panel-default">
+      <div class="panel-body">
+
+	  <h3><%= @idea.title %></h3>
 	  <%= raw(@idea.content) %>
 	  <% if current_user?(@idea.user) %>
 		  <div class="pull-right idea-actions">
@@ -18,7 +20,7 @@
 	  	<div id="dropzone">
 	  		<input data-url="/ideas/<%= @idea.id %>/uploads" id="uploaded_file" name="upload[uploaded_file]" multiple="" type="file"></input>
 	  		<div class="title">Drop file to upload</div>
-	  		<button type="button" class="browse btn btn-primary">Browse</button>
+	  		<button type="button" class="browse btn btn-success">Browse</button>
 	  	</div>
 	  	<div class="upload-list"></div>
 	  </div>
@@ -27,14 +29,15 @@
 	  	<div id="flash_notice"></div>
 	  	<%= render partial: "uploads/upload", collection: @uploads, as: :upload %>
 	  </div>
-	  <hr>
+    </div>
+    
 	  </div>
 	  <%= render "shared/comment_form" %>
 	
 	<% if @comments.any? %>
 	<h3 class="header-close-bot"><%= pluralize(@idea.comment_count, "Comment") %></h3>
 	  <ol class="media-list comments">
-	    <%= render partial: "comment", collection: @comments %>
+	    <%= render partial: "shared/comment", collection: @comments %>
 		</ol>
 		<%= link_to 'Load More Comments', idea_path(:id => @idea.id, :page => @comments.next_page), :class => 'load-more-comments', :remote => true if @comments.next_page %>
 	<% end %>

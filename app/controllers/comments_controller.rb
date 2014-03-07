@@ -18,11 +18,7 @@ class CommentsController < ApplicationController
     @commentable.increment!(:comment_count)
 	  @comment.user_id = @current_user.id
     @idea = @commentable
-	  if @comment.save
-      flash[:success] = 'Comment submitted.'
-    else
-      flash[:error] = 'Comment was not submitted.'
-    end
+	  @comment.save
     respond_to do |format|
       format.html {
         redirect_to @commentable

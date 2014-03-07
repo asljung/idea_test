@@ -1,2 +1,7 @@
-$('ol.media-list.comments').closest('div').children('h3').text("<%= pluralize(@idea.comment_count, "Comment") %>")
-$('ol.media-list.comments').prepend('<%= j render @comment %>');
+var $comments = $('ol.media-list.comments');
+if (!$comments.length){
+  $('div.comment-panel').append("<h3 class='header-close-bot'><%=  pluralize(@idea.comment_count, 'Comment') %></h3><ol class='media-list comments'></ol>");
+}
+
+$('ol.media-list.comments').closest('div').children('h3').text("<%= pluralize(@idea.comment_count, 'Comment') %>");
+$('ol.media-list.comments').prepend('<%= j render partial: "shared/comment", object: @comment %>');

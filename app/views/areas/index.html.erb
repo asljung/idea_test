@@ -1,6 +1,5 @@
 <% provide(:title, 'Challenges') %>
-<h1>Challenges</br><small><%= current_org.area_description %></small></h1>
-<hr>
+<h3>Challenges</br><small><%= current_org.area_description %></small></h3>
 <div class="row">
   <% @areas.each_with_index do |area, index| %>
   	<% if index == 3 %>

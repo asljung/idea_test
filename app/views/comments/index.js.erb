@@ -1,6 +1,6 @@
-var $idea = $("li#<%= @idea.id %>");
+var $idea = $("div#<%= @idea.id %>");
 $idea.find('.comments').show();
-$idea.find('ol.comment-list').append('<%= j render partial: "comment", collection: @comments %>');
+$idea.find('ol.comment-list').append('<%= j render partial: "shared/comment", collection: @comments %>');
 
 var $load_link = $idea.find('a.load-more-comments');
 if ($load_link.length){

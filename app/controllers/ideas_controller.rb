@@ -5,7 +5,7 @@ class IdeasController < ApplicationController
   before_action :selected_area, only: [:new, :create]
 
   def index
-    @ideas = current_ideas.paginate(:page => params[:page])
+    @ideas = current_ideas.paginate(:page => params[:page]).order(created_at: :desc)
     @search = params[:search]
     @vote_link = []
     @vote_class = []
@@ -31,7 +31,7 @@ class IdeasController < ApplicationController
   end
 
   def show
-    @idea = Idea.find(params[:id])
+    @idea = current_ideas.find(params[:id])
     @comment = Comment.new
     @page = params[:page]
     @comments = @idea.comment_threads.paginate(:page => @page, :order => 'created_at DESC')
@@ -51,23 +51,22 @@ class IdeasController < ApplicationController
 
   def create
   	@idea = current_user.ideas.build(idea_params)
-
     if @idea.save
       flash[:success] = "Idea submitted!"
-      redirect_to root_url
+      redirect_to ideas_path()
     else
       render 'new'
     end
   end
 
   def new
+    @area_sel = current_areas.find(@area_id)
     @idea = Idea.new
-    @area_sel = Area.find(@area_id)
   end
 
   def edit
     @idea = Idea.find(params[:id])
-    @area_sel = Area.find(@idea.area_id)
+    @area_sel = current_areas.find(@idea.area_id)
   end
 
   def update

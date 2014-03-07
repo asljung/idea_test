@@ -5,7 +5,9 @@
         <%= link_to image_tag("logo.png", height: '50', width: '195') + "IdeaCloud", root_path,  :class => "navbar-brand" %>
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse1"><i class="glyphicon glyphicon-search"></i></button> 
       </div>
+      <% if signed_in? %>
       <div class="collapse navbar-collapse" id="navbar-collapse1">
+        
         <form class="navbar-form pull-left">
           <div class="input-group" style="max-width:470px;">
             <input type="text" class="form-control" placeholder="Search" name="srch-term" id="srch-term">
@@ -14,7 +16,9 @@
             </div>
           </div>
         </form>
+        
         <ul class="nav navbar-nav navbar-right">
+          
           <li><%= link_to current_user.name, current_user %></a></li>
           <li>
             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-bell"></i></a>
@@ -26,7 +30,7 @@
               <li><a href="#"><span class="badge pull-right">13</span>Link</a></li>
             </ul>
           </li>
-          <% if signed_in? %>
+          
           <li>
             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-user"></i></a>
             <ul class="dropdown-menu">
@@ -36,14 +40,13 @@
               <li><%= link_to "Sign out", signout_path, method: "delete" %></li>
             </ul>
           </li>
-          <% else %>
-            <li><%= link_to "Sign in", signin_path %></li>
-          <% end %>
         </ul>
       </div>
+      <% end %>
     </div>
   </div>
 
+  <% if signed_in? %>
   <div class="navbar navbar-default" id="subnav">
     <div class="col-md-12">
       <div class="navbar-header">    
@@ -59,16 +62,16 @@
       </div>
       <div class="collapse navbar-collapse" id="navbar-collapse2">
         <ul class="nav navbar-nav navbar-left">
-          <%= active_link_to "Home", root_path, "data-role" => "button", :wrap_tag => :li %>
-          <% if signed_in? %>
+          <%= active_link_to "Home", root_path, "data-role" => "button", :active => :exclusive, :wrap_tag => :li %>
+          
           <%= active_link_to "Ideas", ideas_path, "data-role" => "button", :wrap_tag => :li %>
           <%= active_link_to "Challenges", areas_path, "data-role" => "button", :wrap_tag => :li %>
           <%= active_link_to "Submit Idea", submit_path, "data-role" => "button", :data => {:toggle=>"modal"}, :wrap_tag => :li %>
           <%= active_link_to "Help", help_path, "data-role" => "button", :wrap_tag => :li %>
           <%= active_link_to "Users", users_path, "data-role" => "button", :wrap_tag => :li %>
-          <% end %>
         </ul>
       </div> 
     </div> 
   </div>
+  <% end %>
 </header>

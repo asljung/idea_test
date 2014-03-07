@@ -1,6 +1,6 @@
 <div class="panel panel-default">
   <div class="panel-body">
-    <h3><%= area.title %></h3>
+    <p class="lead"><%= area.title %></p>
     <p><%= area.description %></p>
     <p><a href="<%= area_path(area) %>"><%= area.ideas.count %> Ideas</a> | <a href="<%= submit_path(:area_id => area.id) %>">Submit Idea</a></p>
   </div>

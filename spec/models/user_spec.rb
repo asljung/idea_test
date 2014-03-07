@@ -18,6 +18,7 @@ describe User do
   it { should respond_to(:authenticate) }
   it { should respond_to(:admin) }
   it { should respond_to(:ideas) }
+  it { should respond_to(:organisation) }
   it { should respond_to(:votes) }
   it { should respond_to(:voted_ideas) }
 

@@ -1,16 +1,17 @@
 class UsersController < ApplicationController
   before_action :signed_in_user, only: [:index, :edit, :update]
+  before_action :load_organisation, only: [:create, :new]
   before_action :correct_user,   only: [:edit, :update]
   before_action :admin_user,     only: :destroy
   before_action :vote_params,    only: [:vote, :unvote]
 
   def index
-    @users = User.paginate(page: params[:page])
+    @users = current_org.users.paginate(page: params[:page])
   end
 
   def show
-    @user = User.find(params[:id])
-    @ideas = @user.ideas.paginate(page: params[:page])
+    @user = current_org.users.find(params[:id])
+    @ideas = @user.ideas.paginate(page: params[:page], :order => 'created_at DESC')
   end
 
   def new
@@ -18,11 +19,13 @@ class UsersController < ApplicationController
   end
 
   def create
-		@user = User.new(user_params)    
+		@user = User.new(user_params)     
+    @user.organisation_id = @organisation.id
+    logger.debug @user
 		if @user.save
       sign_in @user
-			flash[:success] = "Welcome to the Sample App!"
-     	redirect_to @user
+			flash[:success] = "Welcome to the IdeaCloud!"
+     	redirect_to root_path
     else
       render 'new'
     end
@@ -58,7 +61,7 @@ class UsersController < ApplicationController
 
     def user_params
       params.require(:user).permit(:name, :email, :password,
-                                   :password_confirmation, :idea_id)
+                                   :password_confirmation)
     end
 
     # Before filters

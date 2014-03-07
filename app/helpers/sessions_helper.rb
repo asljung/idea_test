@@ -28,7 +28,7 @@ module SessionsHelper
   end
 
   def current_areas
-    @current_areas = current_org.areas.all
+    @current_areas = current_org.areas
   end
 
   def current_ideas 

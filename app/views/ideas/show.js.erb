@@ -1,6 +1,6 @@
 var $ideas = $('ol.ideas');
 if ($ideas.length){
-  var $idea = $("li#<%= @idea.id %>"); 
+  var $idea = $("div#<%= @idea.id %>"); 
   $idea.find('.content').after("<span class='full_content'><%= j raw(@idea.content) %></span>");
   $idea.find('.full_content').append('<a href="#" class="hide_full_content">Hide</a>');
   $idea.find('.content').append('<a href="#" class="show_full_content">Show more</a>');
@@ -8,7 +8,7 @@ if ($ideas.length){
   $idea.find('.content').hide();
 }
 else{
-	$('.comments').append('<%= j render partial: "comment", collection: @comments %>');
+	$('.comments').append('<%= j render partial: "shared/comment", collection: @comments %>');
 	$('a.load-more-comments').attr('href', '<%= idea_path(:id => @idea.id, :page => @comments.next_page) %>');
 
 	<% unless @comments.next_page %>

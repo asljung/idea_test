@@ -8,7 +8,7 @@ class Idea < ActiveRecord::Base
   has_many :votes, dependent: :destroy
   has_many :voters, through: :votes, source: :user
 	validates :title, presence: true, length: { maximum: 80 }
-	validates :content, presence: true, length: { maximum: 2000 }
+	validates :content, presence: true, length: { maximum: 5000 }
 	validates :user_id, presence: true
 
 	self.per_page = 10

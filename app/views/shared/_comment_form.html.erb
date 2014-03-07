@@ -1,12 +1,12 @@
 <div class="panel panel-default comment-panel">
-  <h2>Post a Comment</h2>
+  <p class="lead">Post a Comment</p>
   <%= form_for([@idea, @comment], remote: true, :html => {:class => "form-inline"}) do |f| %>
     <div class="input-group text-center">
 				<%= f.text_area :body, :class => "form-control input-lg" %>
 				<%= f.hidden_field :commentable_type, :value => "Idea"%>
 	      <%= f.hidden_field :commentable_id, :value => @idea.id%>
         <span class="input-group-btn">	
-	      <%= f.submit "Send", class: "btn btn-lg btn-primary", id: "comment-submit" %></span>
+	      <%= f.submit "Send", class: "btn btn-lg btn-success", id: "comment-submit" %></span>
     </div>
 	<% end %>
 </div>

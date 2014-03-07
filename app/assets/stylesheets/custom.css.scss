@@ -119,16 +119,7 @@ aside {
 
 /* forms */
 
-input, textarea, select, .uneditable-input {
-  border: 1px solid #bbb;
-  width: 100%;
-  margin-bottom: 15px;
-  @include box_sizing;
-}
 
-input {
-  height: auto !important;
-}
 
 #error_explanation {
   color: #f00;
@@ -256,7 +247,8 @@ ol.comments .load-more-comments {
 /* Comments */
 
 #comment-submit {
-
+  height: 68px;
+  width: 90px;
 }
 
 @media (min-width:768px) { 
@@ -350,10 +342,6 @@ div.pagination{
 .panel .panel-heading {
   border-bottom: none;
   padding-bottom: 0px;
-}
-
-.panel .panel-body {
-  padding-top: 5px;
 }
 
 

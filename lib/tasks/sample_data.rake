@@ -14,7 +14,7 @@ def make_organisation
   name = Faker::Lorem.sentence(1)
   description = Faker::Lorem.sentence(5)
   area_description = Faker::Lorem.sentence(5)
-  Organisation.create!(name: name, description: description, area_description: area_description)
+  Organisation.create!(name: name, description: description, area_description: area_description, subdomain: "test")
 end
 
 def make_users
@@ -67,7 +67,7 @@ def make_comments
       body = Faker::Lorem.sentence(20)
       commentable_id = idea.id
       users.each { |user| 
-        Comment.create(title: title, body: body, commentable_id: commentable_id, commentable_type: "Idea", user_id: user.id)
+        Comment.create(body: body, commentable_id: commentable_id, commentable_type: "Idea", user_id: user.id)
         idea.increment!(:comment_count) 
       }
     end

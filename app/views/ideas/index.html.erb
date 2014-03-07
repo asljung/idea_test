@@ -1,18 +1,9 @@
 <% provide(:title, 'All Ideas') %>
- <div class="col-md-3 well">
-        <a href="/submit"><button type="button" class="btn btn-lg btn-primary">Submit an Idea</button></a>
-        <hr>
-        <h3>Areas</h3>
-        <%= render 'shared/area_menu' %>
-    </div>
-<div class="col-md-9">
-	<div class="jumbotron">
-		<h1>All Ideas</h1>
-	</div>
-	<%= form_tag ideas_path, :method => 'get', :id => "idea_search"  do %>
-     <%= text_field_tag :search,  params[:search], :placeholder => 'Search for title...'%> <%= submit_tag "Search", :name => nil, :class => "btn" %>
-	<% end %>
+<h3>Ideas</h3>
+<div class="col-md-4 col-sm-6">
+  <%= render 'idea_filter' %>
+</div>
+<div class="col-md-8">
   <%= render "shared/ideas", collection: @ideas %>
-  <%= link_to 'Load More Ideas', ideas_path(:page => @ideas.next_page, :search => @search), :class => 'load-more-ideas', :remote => true if @ideas.next_page
- %>
+  <%= link_to 'Load More Ideas', ideas_path(:page => @ideas.next_page, :search => @search), :class => 'load-more-ideas', :remote => true if @ideas.next_page %>
 </div>

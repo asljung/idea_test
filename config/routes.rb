@@ -11,7 +11,7 @@ IdeaTest::Application.routes.draw do
     resources :comments
     resources :uploads
   end
-  
+  match '', to: 'organisations#show', constraints: lambda { |r| r.subdomain.present? && r.subdomain != 'www' }, :via => [:get]
   root 'static_pages#home'
   match '/signup',  to: 'users#new',            via: 'get'
   match '/signin',  to: 'sessions#new',         via: 'get'

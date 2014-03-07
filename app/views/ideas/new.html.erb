@@ -1,11 +1,23 @@
 <% provide(:title, 'Submit new Idea') %>
-<h1>Submit new Idea</h1>
-
-<div class="col-md-10 col-md-offset-1">
-  <%= form_for(@idea) do |f| %>
-    <%= render 'fields', f: f %>
-    <div class="col-md-6">
-    <%= f.submit "Submit", class: "btn btn-lg btn-primary form-control" %>
+<div class="row"><h3>New Idea</h3></div>
+<div class="row">
+  <div class="col-md-8 col-sm-6">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <%= form_for(@idea) do |f| %>
+          <%= render 'fields', f: f %>
+            <div class="form-group">
+              <%= f.submit "Submit", class: "btn btn-lg btn-success" %>
+            </div>
+        <% end %>
+      </div>
     </div>
-  <% end %>
+  </div>
+
+  <div class="col-md-4 col-sm-6">    
+    <div class="well">
+      <p class="lead">Submitting a new idea</p>
+      <p>When submitting a new idea, keep in mind that ...</p>  
+    </div>
+  </div>
 </div>

@@ -26,7 +26,6 @@ FactoryGirl.define do
   end
 
   factory :comment do
-    title "Title"
     body "Lorem ipsum"
     user
     commentable

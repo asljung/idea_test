@@ -3,7 +3,7 @@ class AreasController < ApplicationController
 	before_action :save_area
 
 	def show
-		@area = Area.find(params[:id])
+		@area = current_areas.find(params[:id])
 		@ideas_all = @area.ideas 
 		@vote_link = []
     @vote_class = []
@@ -29,7 +29,7 @@ class AreasController < ApplicationController
 	end
 
 	def index
-		@areas = Area.all
+		@areas = current_org.areas
 	end
 
 	private
