@@ -9,6 +9,7 @@ gem 'will_paginate', '3.0.5'
 gem 'bootstrap-will_paginate', '0.0.10'
 gem 'acts_as_commentable_with_threading'
 gem 'active_link_to'
+gem 'activeadmin', github: 'gregbell/active_admin'
 
 group :development, :test do
   gem 'sqlite3', '1.3.8'
@@ -19,6 +20,7 @@ group :development, :test do
   gem "better_errors"
   gem "binding_of_caller"
   gem 'byebug'
+  gem 'meta_request'
 end
 
 group :test do

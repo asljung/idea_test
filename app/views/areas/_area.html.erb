@@ -1,4 +1,9 @@
 <div class="panel panel-default">
+  <% if defined?(area.thumbnail) %>
+  <div class="panel-thumbnail">
+    <%= image_tag(area.thumbnail(:medium), :class => "img-responsive") %>
+  </div>
+  <% end %>
   <div class="panel-body">
     <p class="lead"><%= area.title %></p>
     <p><%= area.description %></p>

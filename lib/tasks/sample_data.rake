@@ -1,7 +1,7 @@
 namespace :db do
   desc "Fill database with sample data"
   task populate: :environment do
-    make_organisation
+    make_organisations
     make_users
     make_areas
     make_ideas
@@ -11,75 +11,94 @@ namespace :db do
 end
 
 def make_organisation
-  name = Faker::Lorem.sentence(1)
-  description = Faker::Lorem.sentence(5)
-  area_description = Faker::Lorem.sentence(5)
-  Organisation.create!(name: name, description: description, area_description: area_description, subdomain: "test")
+  2.times do |n|
+    name = Faker::Lorem.words(2)
+    description = Faker::Lorem.sentence(5)
+    area_description = Faker::Lorem.sentence(5)
+    Organisation.create!(name: name, description: description, area_description: area_description, subdomain: "test#{n}")
+  end
 end
 
 def make_users
-  admin = User.create!(name:     "Example User",
-                       email:    "example@railstutorial.org",
-                       password: "foobar",
-                       password_confirmation: "foobar",
-                       admin: true,
-                       organisation_id: 1)
-  99.times do |n|
-    name  = Faker::Name.name
-    email = "example-#{n+1}@railstutorial.org"
-    password  = "password"
-    User.create!(name:     name,
-                 email:    email,
-                 password: password,
-                 password_confirmation: password,
-                 organisation_id: 1)
-  end
+  orgs = Organisation.all
+  orgs.each { |org|
+    admin = User.create!(name:     "Example User",
+                         email:    "example@railstutorial.org",
+                         password: "foobar",
+                         password_confirmation: "foobar",
+                         admin: true,
+                         active: true,
+                         organisation_id: org.id)
+    30.times do |n|
+      name  = Faker::Name.name
+      email = "example-#{n+1}@railstutorial.org"
+      password  = "password"
+      User.create!(name:     name,
+                   email:    email,
+                   password: password,
+                   password_confirmation: password,
+                   admin: false,
+                   active: true,
+                   organisation_id: org.id)
+    end
+  }
 end
 
 def make_areas
-  5.times do
-    title = Faker::Lorem.sentence(1)
-    description = Faker::Lorem.sentence(5)
-    Area.create!(title: title, description: description, organisation_id: 1)
-  end
+  orgs = Organisation.all
+  orgs.each { |org|
+    5.times do
+      title = Faker::Lorem.sentence(rand(2..4)).chomp('.')
+      description = Faker::Lorem.sentences(rand(1..4)).join(" ")
+      Area.create!(title: title, description: description, organisation_id: org.id)
+    end
+  }
 end
 
 def make_ideas
-  users = User.all(limit: 6)
-  areas = Area.all
-  areas.each { |area|
-    5.times do
-      title = Faker::Lorem.sentence(1)
-      content = Faker::Lorem.sentence(50)
-      vote_count = 0
-      comment_count = 0
-      area_id = area.id
-      users.each { |user| user.ideas.create!(title: title, content: content, area_id: area_id) }
-    end
+  orgs = Organisation.all
+  orgs.each { |org|
+    users = org.users.limit(6)
+    areas = org.areas
+    areas.each { |area|
+      2.times do
+        users.each { |user|
+        title = Faker::Lorem.sentence(rand(2..4)).chomp('.')
+        content = "<p>" + Faker::Lorem.paragraphs(rand(2..8)).join('</p><p>') + "</p>"
+        vote_count = 0
+        comment_count = 0
+        area_id = area.id
+        user.ideas.create!(title: title, content: content, area_id: area_id) }
+      end
+    }
   }
 end
 
 def make_comments
-  users = User.all(limit: 6)
-  ideas = Idea.all
-  ideas.each { |idea|
-    5.times do
-      body = Faker::Lorem.sentence(20)
-      commentable_id = idea.id
+  orgs = Organisation.all
+  orgs.each { |org|
+    users = org.users.limit(10)
+    ideas = Idea.joins(area: :organisation).where(organisations: {id: org.id})
+    ideas.each { |idea|   
       users.each { |user| 
+        body = Faker::Lorem.sentences(rand(1..4)).join(" ")
+        commentable_id = idea.id
         Comment.create(body: body, commentable_id: commentable_id, commentable_type: "Idea", user_id: user.id)
         idea.increment!(:comment_count) 
       }
-    end
+    }
   }
 end
 
 def make_votes
-  users = User.all(limit: 6)
-  ideas = Idea.all
-  users.each { |user|
-    ideas.each{ |idea|
-      user.vote!(idea)
+  orgs = Organisation.all
+  orgs.each { |org|
+    users = org.users.limit(6)
+    ideas = Idea.all
+    users.each { |user|
+      ideas.each{ |idea|
+        user.vote!(idea)
+      }
     }
   }
 end

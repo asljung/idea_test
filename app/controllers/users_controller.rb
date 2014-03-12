@@ -7,6 +7,10 @@ class UsersController < ApplicationController
 
   def index
     @users = current_org.users.paginate(page: params[:page])
+    respond_to do |format|
+      format.html
+      format.js 
+    end
   end
 
   def show
@@ -35,7 +39,9 @@ class UsersController < ApplicationController
   end
 
   def update
-    if @user.update_attributes(user_params)
+    if current_user.admin?
+      @user.update(user_params_admin)
+    elsif @user.update(user_params)
       flash[:success] = "Profile updated"
       redirect_to @user  
     else
@@ -62,6 +68,11 @@ class UsersController < ApplicationController
     def user_params
       params.require(:user).permit(:name, :email, :password,
                                    :password_confirmation)
+    end
+
+    def user_params_admin
+      params.require(:user).permit(:name, :email, :password,
+                                   :password_confirmation, :admin)
     end
 
     # Before filters

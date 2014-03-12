@@ -79,4 +79,5 @@ IdeaTest::Application.configure do
   config.log_formatter = ::Logger::Formatter.new
 
   config.assets.precompile += Ckeditor.assets
+  config.assets.precompile += ['active_admin.js', 'active_admin.css']
 end

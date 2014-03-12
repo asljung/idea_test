@@ -29,13 +29,26 @@ class AreasController < ApplicationController
 	end
 
 	def index
-		@areas = current_org.areas
+		@areas = current_areas
 	end
+
+  def create
+    @area = current_org.areas.build(area_params)
+    @area.save
+  end
+
+  def update
+    @area.update_attributes(area_params)
+  end
 
 	private
 		def save_area
 			session[:area_id] = params[:id]
 		end
+
+    def area_params
+      params.require(:area).permit(:title, :description, :thumbnail, :_destroy)
+    end
 
 end
 

@@ -11,7 +11,7 @@
     <% end %>
 		<div class="idea-body">
       <p class="content">  
-          <%= highlight(strip_tags(idea.content.truncate(400)), @search) %>
+          <%= highlight(strip_tags(idea.content.truncate(200)), @search) %>
           <%= link_to 'Show more', idea_path(:id => idea.id), :class => 'load_full_content', :remote => true %>
       </p>
       </div>

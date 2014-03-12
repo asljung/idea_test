@@ -23,4 +23,8 @@
 //= require ckeditor/config
 //= require bootstrap
 //= require turbolinks
-//= require_tree .
+//= require ./ckeditor/config
+//= require ./ideas
+//= require ./responsive.js
+//= require ./static_pages
+//= require ./uploads

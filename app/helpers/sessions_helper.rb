@@ -23,6 +23,10 @@ module SessionsHelper
     user == current_user
   end
 
+  def authenticate_admin!
+    redirect_to root_path, alert: "You are not an admin user." unless current_user.try(:admin?)
+  end
+
   def current_org
     @current_org = Organisation.find(current_user.organisation_id)
   end
@@ -33,6 +37,10 @@ module SessionsHelper
 
   def current_ideas 
     @current_ideas = Idea.joins(area: :organisation).where(organisations: {id: current_org.id})
+  end
+
+  def current_comments
+    @current_comments = Comment.joins("INNER JOIN ideas ON ideas.id = commentable_id INNER JOIN areas ON areas.id = ideas.area_id INNER JOIN organisations ON organisations.id = areas.organisation_id").where(organisations: {id: current_org.id}).select("comments.*")
   end
 
   def signed_in_user

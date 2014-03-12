@@ -7,7 +7,7 @@ class Idea < ActiveRecord::Base
 	accepts_nested_attributes_for :uploads, :allow_destroy => true
   has_many :votes, dependent: :destroy
   has_many :voters, through: :votes, source: :user
-	validates :title, presence: true, length: { maximum: 80 }
+	validates :title, presence: true, length: { maximum: 200 }
 	validates :content, presence: true, length: { maximum: 5000 }
 	validates :user_id, presence: true
 

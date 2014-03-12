@@ -1,4 +1,5 @@
 IdeaTest::Application.routes.draw do
+  ActiveAdmin.routes(self)
   mount Ckeditor::Engine => '/ckeditor'
   resources :organisations
   resources :users do

@@ -28,6 +28,7 @@ class UploadsController < ApplicationController
   def create
     @upload = Upload.new(upload_params)
     @upload.idea_id = params[:idea_id]
+    @idea = Idea.find(@upload.idea_id)
     respond_to do |format|
       if @upload.save
         format.html { redirect_to idea_path(@upload.idea_id), notice: 'Upload was successfully created.' }
