@@ -1,9 +1,7 @@
 <% provide(:title, @idea.title) %>
 <div class="col-md-8">
-	
-    <div class="panel panel-default">
-      <div class="panel-body">
-
+  <div class="panel panel-default">
+    <div class="panel-body">
 	  <h3><%= @idea.title %></h3>
 	  <%= raw(@idea.content) %>
 	  <% if current_user?(@idea.user) %>
@@ -13,22 +11,23 @@
 	                                   data: { confirm: "Are you sure you want to delete the idea?" },
 	                                   title: @idea.title, class: "glyphicon glyphicon-remove" %>
 			</div>
-		<% end %>
-	  <hr>
-	  <% if current_user?(@idea.user) %>
-	  <div id="upload">
-	  	<div id="dropzone">
-	  		<input data-url="/ideas/<%= @idea.id %>/uploads" id="uploaded_file" name="upload[uploaded_file]" multiple="" type="file"></input>
-	  		<div class="title">Drop file to upload</div>
-	  		<button type="button" class="browse btn btn-success">Browse</button>
-	  	</div>
-	  	<div class="upload-list"></div>
-	  </div>
+      <hr>
+  	  <div id="upload">
+  	  	<div id="dropzone">
+  	  		<input data-url="/ideas/<%= @idea.id %>/uploads" id="uploaded_file" name="upload[uploaded_file]" multiple="" type="file"></input>
+  	  		<div class="title">Drop file to upload</div>
+  	  		<button type="button" class="browse btn btn-success">Browse</button>
+  	  	</div>
+  	  	<div class="upload-list"></div>
+  	  </div>
 	  <% end %>
+    <% if @uploads.any? %>
+    <hr>
 	  <div id="files">
 	  	<div id="flash_notice"></div>
 	  	<%= render partial: "uploads/upload", collection: @uploads, as: :upload %>
 	  </div>
+      <% end %>
     </div>
     
 	  </div>
@@ -44,6 +43,7 @@
 </div>
 <div class="col-md-4">
 	<div class="idea-info well">
+    <p class="lead">Info</p>
     <p>Author: <%= link_to @idea.user.name, @idea.user %></p>
     <p>Challenge: <%= link_to Area.find(@idea.area_id).title, Area.find(@idea.area_id) %></p>
     <p>Posted: <%= @idea.created_at %></p>

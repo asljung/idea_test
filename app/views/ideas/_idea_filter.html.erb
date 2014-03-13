@@ -1,25 +1,21 @@
 <div class="well">        
-<h3>Filters</h3>
-<div class="form-group">
-  <label>Sort by</label>
-  <select class="form-control">
-    <option>Most popular</option>
-    <option>Most recent</option>
-    <option>Most commented</option>
-  </select>
-</div>
-<div class="form-group">
-  <label>Phases</label>
-  <div class="checkbox">
-    <label>
-    <input type="checkbox" value="">New</label>
+  <h3>Filters</h3>
+  <%= form_tag ideas_path, :method => 'get', :id => "idea_filter" do %>
+  <div class="form-group">
+    <%= label_tag(:search, "Keyword:") %>
+    <%= text_field_tag :search, params[:search], class: "form-control" %>
   </div>
-  <div class="checkbox">
-    <label><input type="checkbox" value="">Evaluation</label></div>
-  <div class="checkbox">
-    <label><input type="checkbox" value="">Implementation</label>
+  <div class="form-group">
+    <%= label_tag(:sort, "Sort by:") %>
+    <%= select_tag(:sort, options_for_select([['Most recent', "recent"], ['Most popular', "popular"], ['Most commented', "commented"]], params[:sort]), class: "form-control") %>
   </div>
-  <div class="checkbox">
-    <label><input type="checkbox" value="">Archived</label></div>
-  </div>    
+  <div class="form-group">
+    <label>Phases</label>
+    <div class="checkbox"><%= check_box_tag :new, 1, defined?(params[:new]) && params[:new] == '1' %> New</div> 
+    <div class="checkbox"><%= check_box_tag :evaluation, 1, defined?(params[:evaluation]) && params[:evaluation] == '1' %> Evaluation</div>
+    <div class="checkbox"><%= check_box_tag :implementation, 1, defined?(params[:implementation]) && params[:implementation] == '1' %> Implementation</div>
+    <div class="checkbox"><%= check_box_tag :archived, 1, defined?(params[:archived]) && params[:archived] == '1' %> Archived</div>
+  </div>
+  <%= submit_tag "Show", :name => nil, class: "btn btn-lg btn-success" %>
+  <% end %>   
 </div>

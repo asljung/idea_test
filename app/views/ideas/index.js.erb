@@ -1,5 +1,5 @@
-$('.ideas').append('<%= j render partial: "shared/idea", collection: @ideas %>');
-$('a.load-more-ideas').attr('href', '<%= ideas_path(:page => @ideas.next_page, :search => params[:search]) %>');
+$('.ideas').append('<%= j render @ideas %>');
+$('a.load-more-ideas').attr('href', '<%= ideas_path(params.merge(:page => @ideas.next_page)) %>');
 
 <% unless @ideas.next_page %>
 	$('a.load-more-ideas').remove();

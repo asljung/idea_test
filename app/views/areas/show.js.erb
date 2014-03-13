@@ -1,0 +1,6 @@
+$('.ideas').append('<%= j render @ideas %>');
+$('a.load-more-ideas').attr('href', '<%= area_path(params.merge(:page => @ideas.next_page)) %>');
+
+<% unless @ideas.next_page %>
+  $('a.load-more-ideas').remove();
+<% end %>

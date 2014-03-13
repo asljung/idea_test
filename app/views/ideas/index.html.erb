@@ -4,6 +4,10 @@
   <%= render 'idea_filter' %>
 </div>
 <div class="col-md-8">
-  <%= render "shared/ideas", collection: @ideas %>
-  <%= link_to 'Load More Ideas', ideas_path(:page => @ideas.next_page, :search => @search), :class => 'load-more-ideas', :remote => true if @ideas.next_page %>
+  <% if @ideas.any? %>
+  <div class="media-list ideas">
+    <%= render @ideas %>
+  </div>
+  <% end %>
+  <%= link_to 'Load More Ideas', ideas_path(params.merge(:page => @ideas.next_page)), :class => 'load-more-ideas', :remote => true if @ideas.next_page %>
 </div>

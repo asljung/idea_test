@@ -1,4 +1,4 @@
-var $ideas = $('ol.ideas');
+var $ideas = $('div.ideas');
 if ($ideas.length){
   var $idea = $("div#<%= @idea.id %>"); 
   $idea.find('.content').after("<span class='full_content'><%= j raw(@idea.content) %></span>");

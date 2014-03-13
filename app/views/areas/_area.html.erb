@@ -5,7 +5,7 @@
   </div>
   <% end %>
   <div class="panel-body">
-    <p class="lead"><%= area.title %></p>
+    <p class="lead"><%= link_to area.title, area_path(area) %></p>
     <p><%= area.description %></p>
     <p><a href="<%= area_path(area) %>"><%= area.ideas.count %> Ideas</a> | <a href="<%= submit_path(:area_id => area.id) %>">Submit Idea</a></p>
   </div>

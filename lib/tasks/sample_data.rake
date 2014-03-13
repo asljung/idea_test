@@ -58,18 +58,16 @@ end
 def make_ideas
   orgs = Organisation.all
   orgs.each { |org|
-    users = org.users.limit(6)
+    users = org.users.limit(10)
     areas = org.areas
     areas.each { |area|
-      2.times do
-        users.each { |user|
-        title = Faker::Lorem.sentence(rand(2..4)).chomp('.')
-        content = "<p>" + Faker::Lorem.paragraphs(rand(2..8)).join('</p><p>') + "</p>"
-        vote_count = 0
-        comment_count = 0
-        area_id = area.id
-        user.ideas.create!(title: title, content: content, area_id: area_id) }
-      end
+      users.each { |user|
+      title = Faker::Lorem.sentence(rand(2..4)).chomp('.')
+      content = "<p>" + Faker::Lorem.paragraphs(rand(2..8)).join('</p><p>') + "</p>"
+      vote_count = 0
+      comment_count = 0
+      area_id = area.id
+      user.ideas.create!(title: title, content: content, area_id: area_id) }
     }
   }
 end

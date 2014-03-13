@@ -5,7 +5,14 @@ class IdeasController < ApplicationController
   before_action :selected_area, only: [:new, :create]
 
   def index
-    @ideas = current_ideas.paginate(:page => params[:page]).order(created_at: :desc)
+    if params[:sort] == "popular"
+      @ideas = current_ideas.voted.paginate(:page => params[:page]).search(params[:params])
+    elsif params[:sort] == "commented"
+      @ideas = current_ideas.commented.paginate(:page => params[:page]).search(params[:params])
+    else
+      @ideas = current_ideas.recent.paginate(:page => params[:page]).search(params[:params])
+    end
+
     @search = params[:search]
     @vote_link = []
     @vote_class = []
@@ -37,12 +44,12 @@ class IdeasController < ApplicationController
     @comments = @idea.comment_threads.paginate(:page => @page, :order => 'created_at DESC')
     @uploads = @idea.uploads
     if @idea.voted?(current_user) 
-        @vote_link = user_unvote_path(:id => current_user.id, :idea_id => @idea.id)
-        @vote_class = "voted"
-      else
-        @vote_link = user_vote_path(:id => current_user.id, :idea_id => @idea.id)
-        @vote_class = "unvoted"
-      end
+      @vote_link = user_unvote_path(:id => current_user.id, :idea_id => @idea.id)
+      @vote_class = "voted"
+    else
+      @vote_link = user_vote_path(:id => current_user.id, :idea_id => @idea.id)
+      @vote_class = "unvoted"
+    end
     respond_to do |format|
       format.html
       format.js

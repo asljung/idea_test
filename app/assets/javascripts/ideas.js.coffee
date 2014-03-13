@@ -20,7 +20,9 @@ jQuery ->
   $('#comment_body').keypress (e) ->
     if e.keyCode == 13 && !e.shiftKey
       e.preventDefault()
-      $(this).closest("form").submit()  
+      $(this).closest("form").submit()
+      this.value = ""
+      return false
 
   $(document).on 'click', 'a.hide_full_content', (e) ->
     $idea = $(this).closest("div")

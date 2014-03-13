@@ -12,7 +12,7 @@
     <% if @user.ideas.any? %>
       <h3>Ideas (<%= @user.ideas.count %>)</h3>
        <ol class="media-list">
-        <%= render partial: "shared/idea", collection: @ideas, as: :idea %>
+        <%= render @ideas%>
       </ol>
       <%= will_paginate @ideas %>
     <% end %>

@@ -13,6 +13,15 @@ class Idea < ActiveRecord::Base
 
 	self.per_page = 10
 
+  scope :recent, -> { order("created_at DESC")}
+  scope :commented, -> { order("comment_count DESC")}
+  scope :voted, -> {
+    joins(:votes).
+      select('ideas.*, count(votes.id) as votes_count').
+      group('ideas.id').
+      order('votes_count DESC, ideas.created_at DESC')
+  }
+
 	def self.search(search)
     if search
       where("ideas.title LIKE ? OR ideas.content LIKE ?", "%#{search}%", "%#{search}%")

@@ -4,11 +4,11 @@ class AreasController < ApplicationController
 
 	def show
 		@area = current_areas.find(params[:id])
-		@ideas_all = @area.ideas 
+		@ideas = @area.ideas.recent.paginate(:page => params[:page])
 		@vote_link = []
     @vote_class = []
     @images = []
-    @ideas_all.each { |idea|
+    @ideas.each { |idea|
       if idea.voted?(current_user) 
         @link = user_unvote_path(:id => current_user.id, :idea_id => idea.id)
         @class = "voted"

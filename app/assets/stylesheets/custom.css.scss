@@ -157,6 +157,11 @@ p.activity {
 
 /* ideas */
 
+.jumbotron {
+  hr {border-color: $gray-light;}
+  small {color: $gray;}
+}
+
 .content, .comment_content, .full_content, .hide_full_content {
   display: block;
 }
@@ -233,7 +238,7 @@ aside {
 }
 
 .load-more-ideas {
-  color: #FFFFFF;
+  color: #e0e0e0;
 }
 
 ol.comments .load-more-comments {
