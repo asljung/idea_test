@@ -1,6 +1,6 @@
 class OrganisationsController < ApplicationController
-  before_action :load_organisation
-	before_action :signed_in_user
+  before_action :load_organisation, only: [:show]
+	before_action :signed_in_user, only: [:show]
 
 	def show
       limit = 10
@@ -31,6 +31,30 @@ class OrganisationsController < ApplicationController
         format.js
       end
 	end
+
+  def new
+    @org = Organisation.new
+    @org.users.build
+  end
+
+  def create
+    @org = Organisation.new(organisation_params)
+    if @org.save
+      @user = @org.users.first
+      sign_in(@user, nil, "." + request.domain)
+      flash[:notice] = "Organisation successfully created!"
+      redirect_to root_url(subdomain: @org[:subdomain])
+    else
+      render :action => 'new'
+    end
+  end
+
+  private
+
+    def organisation_params
+      params.require(:organisation).permit(:name, :description, :area_description, :subdomain, users_attributes: [:id, :name, :email, :password,
+                                   :password_confirmation, :admin, :active])
+    end
 
 end
 

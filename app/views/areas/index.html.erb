@@ -1,12 +1,16 @@
 <% provide(:title, 'Challenges') %>
 <h3>Challenges</br><small><%= current_org.area_description %></small></h3>
 <div class="row">
-  <% @areas.each_with_index do |area, index| %>
-  	<% if index == 3 %>
-  		</div><div class="row">
-  		<% index==0 end %>
-      <div class="col-md-4">
-        <%= render partial: area %>
-      </div>
+  <% if @areas.any? %>
+    <% @areas.each_with_index do |area, index| %>
+    	<% if index == 3 %>
+    		</div><div class="row">
+    		<% index==0 end %>
+        <div class="col-md-4">
+          <%= render partial: area %>
+        </div>
+    <% end %>
+  <% else %>
+    <%= render 'shared/no_areas' %>
   <% end %>
 </div>

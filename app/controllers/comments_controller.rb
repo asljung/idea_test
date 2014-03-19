@@ -15,10 +15,11 @@ class CommentsController < ApplicationController
 	  @current_user ||= User.find(session[:user_id]) if session[:user_id]
 	  @commentable = Comment.find_commentable(params[:comment][:commentable_type], params[:comment][:commentable_id])
 	 	@comment.commentable = @commentable
-    @commentable.increment!(:comment_count)
 	  @comment.user_id = @current_user.id
     @idea = @commentable
-	  @comment.save
+	  if @comment.save
+      @commentable.increment!(:comment_count)
+     end
     respond_to do |format|
       format.html {
         redirect_to @commentable
@@ -26,6 +27,14 @@ class CommentsController < ApplicationController
       format.js
     end
 	end
+
+  def destroy
+    @comment = Comment.find(params[:id])
+    if @comment.destroy
+      @comment.commentable.decrement!(:comment_count)
+    end
+    redirect_to(:back)
+  end
 
 	def get_idea
     @idea = Idea.find(params[:idea_id])

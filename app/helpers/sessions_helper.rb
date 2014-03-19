@@ -1,9 +1,16 @@
 module SessionsHelper
-	def sign_in(user)
+	def sign_in(user, remember, domain)
     remember_token = User.new_remember_token
-    cookies.permanent[:remember_token] = remember_token
+    if domain.nil?
+      cookie_value = remember_token
+    else
+      cookie_value = { value: remember_token, domain: domain }
+    end
+    logger.debug "Cookie_value: #{cookie_value.inspect}"
+    cookies.permanent[:remember_token] = cookie_value
     user.update_attribute(:remember_token, User.encrypt(remember_token))
     self.current_user = user
+    logger.debug "Cookie remember_token: #{cookies[:remember_token].inspect}"
   end
 
   def signed_in?
@@ -15,6 +22,7 @@ module SessionsHelper
   end
 
   def current_user
+    logger.debug "Cookie current_user remember_token: #{cookies[:remember_token].inspect}"
     remember_token = User.encrypt(cookies[:remember_token])
     @current_user ||= User.find_by(remember_token: remember_token)
   end
@@ -25,6 +33,10 @@ module SessionsHelper
 
   def authenticate_admin!
     redirect_to root_path, alert: "You are not an admin user." unless current_user.try(:admin?)
+  end
+
+  def admin?
+    current_user.try(:admin?)
   end
 
   def current_org

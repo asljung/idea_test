@@ -1,5 +1,5 @@
 ActiveAdmin.register Area, as: "Challenge" do
-
+  scope_to :current_org, association_method: :areas
   
   # See permitted parameters documentation:
   # https://github.com/gregbell/active_admin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
@@ -26,7 +26,7 @@ ActiveAdmin.register Area, as: "Challenge" do
       f.input :description
       f.input :thumbnail, :as => :file, :hint => f.template.image_tag(f.object.thumbnail.url(:thumb))
       # Will preview the image when the object is edited
-      f.input :_destroy, as: :boolean, required: :false, label: 'Remove image'
+      f.input :_destroy, as: :boolean, required: :false, label: 'Remove image' if f.object.thumbnail.url(:thumb) != "/thumbnails/thumb/missing.png"
     end
     f.actions
   end
@@ -34,7 +34,7 @@ ActiveAdmin.register Area, as: "Challenge" do
   index do
     id_column
     column "Thumbnail" do |area|
-      image_tag(area.thumbnail.url(:thumb))
+      image_tag(area.thumbnail.url(:thumb)) if area.thumbnail.url(:thumb) != "/thumbnails/thumb/missing.png"
     end
     column :title
     column :description
@@ -47,7 +47,7 @@ ActiveAdmin.register Area, as: "Challenge" do
     attributes_table do
       row :id
       row "Thumbnail" do |area|
-        image_tag(area.thumbnail.url(:thumb))
+        image_tag(area.thumbnail.url(:thumb)) if area.thumbnail.url(:thumb) != "/thumbnails/thumb/missing.png"
       end
       row :title
       row :description

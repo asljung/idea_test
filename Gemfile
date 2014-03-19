@@ -38,10 +38,13 @@ gem 'jquery-turbolinks'
 gem 'jbuilder', '1.0.2'
 gem 'therubyracer', :platform => :ruby
 gem 'ajax_pagination'
-gem 'paperclip'
+gem 'paperclip' # file attachment syntax and callbacks
+gem 'aws-sdk' # S3 API
+gem 's3_direct_upload' # direct upload form helper and assets
 gem 'ckeditor'
 gem 'jquery-fileupload-rails'
 gem 'swipebox'
+gem 'truncate_html'
 
 group :doc do
   gem 'sdoc', '0.3.20', require: false

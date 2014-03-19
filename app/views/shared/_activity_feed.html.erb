@@ -1,2 +1,2 @@
-<p class="activity"><strong><%= activity_feed.name %></strong> has <% if activity_feed.respond_to? 'comment' %>commented on<% else %>created<% end %> <%= link_to activity_feed.title, idea_path(activity_feed.id) %> <%= time_ago_in_words(activity_feed.activity_date + ' Z') %> ago.</p>
+<p class="activity"><strong><%= activity_feed.name %></strong> has <% if activity_feed.respond_to? 'comment' %>commented on<% else %>posted<% end %> <%= link_to activity_feed.title, idea_path(activity_feed.id) %> <%= time_ago_in_words(activity_feed.activity_date + ' Z') %> ago.</p>
 <%= render partial: "ideas/idea", object: activity_feed, as: :idea %>

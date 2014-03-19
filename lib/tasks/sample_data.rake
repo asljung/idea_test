@@ -63,7 +63,8 @@ def make_ideas
     areas.each { |area|
       users.each { |user|
       title = Faker::Lorem.sentence(rand(2..4)).chomp('.')
-      content = "<p>" + Faker::Lorem.paragraphs(rand(2..8)).join('</p><p>') + "</p>"
+      content = "<p>" + Faker::Lorem.paragraph(rand(8..12)) + "</p>" +
+                "<p>" + Faker::Lorem.paragraph(rand(8..12)) + "</p>"
       vote_count = 0
       comment_count = 0
       area_id = area.id

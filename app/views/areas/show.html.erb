@@ -13,6 +13,8 @@
         <%= render @ideas %>
       </div>
       <%= link_to 'Load More Ideas', area_path(params.merge(:page => @ideas.next_page)), :class => 'load-more-ideas', :remote => true if @ideas.next_page %>
+      <% else %>
+        <%= render 'shared/no_ideas' %>
       <% end %>
     </div>
   </div>

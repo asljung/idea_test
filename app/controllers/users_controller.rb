@@ -25,9 +25,8 @@ class UsersController < ApplicationController
   def create
 		@user = User.new(user_params)     
     @user.organisation_id = @organisation.id
-    logger.debug @user
 		if @user.save
-      sign_in @user
+      sign_in(@user, nil, nil)
 			flash[:success] = "Welcome to the IdeaCloud!"
      	redirect_to root_path
     else

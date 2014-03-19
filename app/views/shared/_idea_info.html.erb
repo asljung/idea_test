@@ -1,0 +1,11 @@
+<p class="lead">Info</p>
+<p>Author: <%= link_to @idea.user.name, @idea.user %></p>
+<p>Challenge: <%= link_to Area.find(@idea.area_id).title, Area.find(@idea.area_id) %></p>
+<p>Posted: <%= @idea.created_at.to_formatted_s(:long) %></p>
+<p>Last Edit: <%= @idea.updated_at.to_formatted_s(:long) %></p>
+</br>
+<span><% if @idea.comment_count %>
+  <%= pluralize(@idea.comment_count, "Comment")%>
+  <% else %>0 Comments<% end %>
+</span> | 
+<span class="idea-votes"><%= pluralize(@idea.vote_count, "Upvote") %></span>

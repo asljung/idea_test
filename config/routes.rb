@@ -1,7 +1,7 @@
 IdeaTest::Application.routes.draw do
   ActiveAdmin.routes(self)
   mount Ckeditor::Engine => '/ckeditor'
-  resources :organisations
+  resources :organisations, only: [:new, :create, :show]
   resources :users do
     get :vote, :on => :member
     get :unvote, :on => :member

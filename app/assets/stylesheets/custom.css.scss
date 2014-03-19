@@ -163,11 +163,15 @@ p.activity {
 }
 
 .content, .comment_content, .full_content, .hide_full_content {
-  display: block;
+  //display: block;
 }
 
 .img-thumbnail {
   margin-bottom: 20px;
+}
+
+.idea-panel {
+  padding-top: 0;
 }
 
 .ideas .comments{
@@ -176,6 +180,9 @@ p.activity {
 
 .idea-info{
   clear:both;
+  padding-top: 10px;
+  border:0 solid #efefef; 
+  border-top-width:1px;
 }
 
 .comment_list li{

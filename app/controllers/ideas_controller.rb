@@ -67,8 +67,13 @@ class IdeasController < ApplicationController
   end
 
   def new
-    @area_sel = current_areas.find(@area_id)
-    @idea = Idea.new
+    if current_areas.any?
+      @area_sel = current_areas.find(@area_id)
+      @idea = Idea.new
+    else
+      flash[:notice] = "No challenges. A challenge has to exist before ideas can be submitted"
+      redirect_to root_path()
+    end
   end
 
   def edit

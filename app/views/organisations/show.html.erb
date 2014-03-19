@@ -2,12 +2,21 @@
 <div class="row">
   <div class="col-md-8">    
     <h3>Activity Feed</h3>   
-    <div class="media-list ideas">
-      <%= render partial: "shared/activity_feed", collection: @ideas %>
-    </div>
+    <% if @ideas.any? %>
+      <div class="media-list ideas">
+        <%= render partial: "shared/activity_feed", collection: @ideas %>
+      </div>
+    <% else %>
+      <%= render 'shared/no_ideas' %>
+    <% end %>
   </div>
   <div class="col-md-4 col-sm-6">
       <h3>Challenges</h3>
-      <%= render 'shared/area_menu' %>
+      <% if current_areas.any? %>
+        <%= render 'shared/area_menu' %>
+      <% else %>
+        <%= render 'shared/no_areas' %>
+      <% end %>
+
   </div>
 </div>

@@ -8,6 +8,9 @@
   <div class="media-list ideas">
     <%= render @ideas %>
   </div>
-  <% end %>
   <%= link_to 'Load More Ideas', ideas_path(params.merge(:page => @ideas.next_page)), :class => 'load-more-ideas', :remote => true if @ideas.next_page %>
+  <% else %>
+    <%= render 'shared/no_ideas' %>
+  <% end %>
+  
 </div>

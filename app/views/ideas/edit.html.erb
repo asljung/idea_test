@@ -1,11 +1,21 @@
 <% provide(:title, "Edit idea") %>
-<h1>Edit your idea</h1>
+<div class="row"><h3>Edit Idea</h3></div>
+<div class="row">
+  <div class="col-md-8 col-sm-6">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <%= form_for(@idea) do |f| %>
+          <%= render 'fields', f: f %>
+          <div class="form-group">
+    	      <%= f.submit "Save changes", class: "btn btn-lg btn-success" %>
+          </div>
+        <% end %>
+		  </div>
+    </div>
+  </div>
 
-<div class="col-md-10 col-md-offset-1">
-  <%= form_for(@idea) do |f| %>
-    <%= render 'fields', f: f %>
-    <div class="col-md-6">
-    	<%= f.submit "Save changes", class: "btn btn-lg btn-primary form-control" %>
-		</div>
-  <% end %>
+  <div class="col-md-4 col-sm-6">    
+    <div class="idea-info well">
+    <%= render partial: "shared/idea_info" %>  
+  </div>
 </div>

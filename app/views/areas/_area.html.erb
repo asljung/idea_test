@@ -1,12 +1,12 @@
 <div class="panel panel-default">
-  <% if defined?(area.thumbnail) %>
+  <% if defined?(area.thumbnail) && area.thumbnail(:medium) != "/thumbnails/medium/missing.png" %>
   <div class="panel-thumbnail">
     <%= image_tag(area.thumbnail(:medium), :class => "img-responsive") %>
   </div>
   <% end %>
   <div class="panel-body">
     <p class="lead"><%= link_to area.title, area_path(area) %></p>
-    <p><%= area.description %></p>
+    <p><%= truncate(area.description, length: 200, separator: ' ') %></p>
     <p><a href="<%= area_path(area) %>"><%= area.ideas.count %> Ideas</a> | <a href="<%= submit_path(:area_id => area.id) %>">Submit Idea</a></p>
   </div>
 </div>
